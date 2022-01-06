@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.theme.app')
 
 @section('content')
 <div class="container">
@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="alert alert-success" role="alert">
+                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
