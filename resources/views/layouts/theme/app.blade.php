@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>SISTEMA DE VENTAS</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon.ico') }}"/>
-    
 
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     @include('layouts.theme.styles')
@@ -41,7 +40,7 @@
             </div>
 
             @include('layouts.theme.footer')
-
+            @include('sweetalert::alert')
         </div>
         <!--  END CONTENT AREA  -->
 
@@ -64,6 +63,7 @@
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     @include('layouts.theme.scripts')
     <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
 
 </body>
 </html>

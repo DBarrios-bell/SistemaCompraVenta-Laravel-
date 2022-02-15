@@ -11,4 +11,26 @@ class Category extends Model
 
     protected $fillable =['name','image'];
 
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
+    public function getImagenAttribute(){
+        if($this->image != null)
+            return (file_exists('storage/categorias/' . $this->image) ? $this->image : 'blank.jpeg');
+        else
+            return 'blank.jpeg';
+
+            //hace lo mismo que el de arriba
+        // if($this->image != NULL)
+        //      {
+        //         if(file_exists('storage/categorias/' . $this->image))
+        //             return $this->image;
+        //         else
+        //             return 'blank.jpeg';
+        //      }else{
+        //          return 'blank.jpeg';
+        //      }
+    }
+
 }
