@@ -13,7 +13,7 @@
             </svg></a>
         <ul class="navbar-item flex-row">
             <li class="nav-item theme-logo">
-                <a href="{{ route('home') }}" width="15" height="15" style="text-decoration: none">
+                <a href="{{ route('index') }}" width="15" height="15" style="text-decoration: none">
                     <img src="assets/img/add2.png" class="navbar-logo" alt="logo"><b
                         style="font-size: 22px; color: #3B3F5C">{{ config('app.name') }}</b>
                 </a>

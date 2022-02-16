@@ -18,8 +18,12 @@
                         @endforeach
                     </select>
                 </div>
+                @can('6.1 Asignar Permisos')
                 <button wire:click.prevent='SyncAll()' class="btn btn-dark mbmobile inblock mr-5">Sincronizar Todo</button>
+                @endcan
+                @can('6.2 Revocar Permisos')
                 <button onclick="Revocar()" class="btn btn-dark mbmobile mr-5">Revocar Todo</button>
+                @endcan
             </div>
 
             <div class="row mt-3">

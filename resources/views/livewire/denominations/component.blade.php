@@ -5,12 +5,14 @@
                 <h4 class="card-title">
                     <b> {{ $componentName }} | {{ $pageTitle }}</b>
                 </h4>
+                @can('8.1 Crear Moneda')
                 <ul class="tabs tab-pills">
                     <li>
                         <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal"
                             style="text-decoration: none">Agregar</a>
                     </li>
                 </ul>
+                @endcan
             </div>
             @include('common.searchbox')
             <div class="widget-content">
@@ -40,15 +42,19 @@
                                     </span>
                                 </td>
                                 <td class="text-center">
+                                    @can('8.2 Editar moneda')
                                     <a href="javascript:void(0)" wire:click="Edit({{$coin->id}})"
                                         class="btn btn-dark mtmobile" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
+                                    @endcan
+                                    @can('8.3 Eliminar moneda')
                                     <a href="javascript:void(0)"
                                         onclick="Confirm('{{$coin->id}}')"
                                         class="btn btn-dark " title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

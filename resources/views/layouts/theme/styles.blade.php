@@ -62,6 +62,9 @@
         box-shadow: none;
         border-radius: 30px;
     }
+    .bg-image {
+        background: url();
+    }
 </style>
 
 <link href="{{asset ('plugins/flatpickr/flatpickr.dark.css') }}" rel="stylesheet" type="text/css" />

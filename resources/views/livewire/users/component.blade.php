@@ -5,12 +5,14 @@
                 <h4 class="card-title">
                     <b>{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
+                @can('7.1 Crear Usuario')
                 <ul class="tabs tab-pills">
                     <li>
                         <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal"
                             data-target="#theModal">Agregar</a>
                     </li>
                 </ul>
+                @endcan
             </div>
             @include('common.searchbox')
 
@@ -48,20 +50,24 @@
                                 </td>
                                 <td class="text-center">
                                     @if($r->image !=null)
-                                    <img src=" {{asset('storage/user/' . $r->image)}} " alt="Imagen" class="card-img-top img-fluid">
+                                    <img src=" {{asset('storage/users/' . $r->image)}} " alt="Sin Imagen" height="30" width="40" class="rounded" class="card-img-top img-fluid">
                                     @endif
                                 </td>
                                 <td class="text-center">
+                                    @can('7.2 Actualizar Usuario')
                                     <a href="javascript:void(0)"
                                     wire:click='Edit({{$r->id}})'
                                     class="btn btn-dark mtmobile" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
+                                    @endcan
+                                    @can('7.3 Eliminar usuario')
                                     <a href="javascript:void(0)"
                                     onclick="Confirm('{{$r->id}}')"
                                     class="btn btn-dark" title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

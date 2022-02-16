@@ -6,11 +6,13 @@
                     <b>{{$componentName}} | {{$pageTitle}}</b>
                 </h5>
                 <ul class="tabs tab-pills">
+                    @can('4.1 Crear Rol')
                     <li>
                         <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal"
                             style="text-decoration: none">Agregar
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </div>
             @include('common.searchbox')
@@ -35,16 +37,20 @@
                                     <h6>{{$role->name}}</h6>
                                 </td>
                                 <td class="text-center">
+                                @can('4.2 Editar Rol')
                                     <a href="javascript:void(0)"
                                     wire:click='Edit({{$role->id}})'
                                     class="btn btn-dark mtmobile" title="Editar Registro">
                                         <i class="fas fa-edit"></i>
                                     </a>
+                                @endcan
+                                @can('4.3 Eliminar Rol')
                                     <a href="javascript:void(0)"
                                     onclick="Confirm('{{$role->id}}')"
                                     class="btn btn-dark " title="Eliminar Registro">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                @endcan
                                 </td>
                             </tr>
                             @endforeach

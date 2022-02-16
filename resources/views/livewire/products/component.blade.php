@@ -54,16 +54,20 @@
                                     </span> --}}
                                 </td>
                                 <td class="text-center">
+                                    @can('2.2 Editar Producto')
                                     <a href="javascript:void(0)"
                                     wire:click.prevent="Edit({{$product->id}})"
                                     class="btn btn-dark mtmobile" title="Edit">
                                         <i  class="fas fa-edit"></i>
                                     </a>
+                                    @endcan
+                                    @can('2.3 Eliminar Producto')
                                     <a href="javascript:void(0)"
                                     onclick="Confirm('{{$product->id}}')"
                                     class="btn btn-dark " title="Delete">
                                         <i class="fas fa-trash"></i>
                                     </a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

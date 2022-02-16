@@ -1,4 +1,4 @@
-<div class="sidebar-wrapper sidebar-theme" >
+<div class="sidebar-wrapper sidebar-theme">
     <nav id='compactSidebar'>
 
         <ul class="menu-categories">
@@ -41,7 +41,7 @@
                     </a>
                 </li>
             @endcan
-            @can('3. Tab Venta')
+            @can('3. Tab Ventas')
                 <li class="">
                     <a href="{{ route('pos') }}" class="menu-toggle" data-active='false'>
                         <div class="base-menu">
@@ -60,7 +60,7 @@
                     </a>
                 </li>
             @endcan
-            {{-- @can('4. Roles') --}}
+            @can('4. Tab Rol')
                 <li class="">
                     <a href="{{ route('roles') }}" class="menu-toggle" data-active='false'>
                         <div class="base-menu">
@@ -77,8 +77,8 @@
                         </div>
                     </a>
                 </li>
-            {{-- @endcan --}}
-            {{-- @can('5. Permisos') --}}
+            @endcan
+            @can('5. Tab Permiso')
                 <li class="">
                     <a href="{{ route('permisos') }}" class="menu-toggle" data-active='false'>
                         <div class="base-menu">
@@ -94,93 +94,97 @@
                         </div>
                     </a>
                 </li>
-            {{-- @endcan --}}
-            {{-- @can('6. Asignar') --}}
-            <li class="">
-                <a href="{{ route('asignar') }}" class="menu-toggle" data-active='false'>
-                    <div class="base-menu">
-                        <div class="base-icons">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-eye">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
-                            </svg>
+            @endcan
+            @can('6. Tab Asignar')
+                <li class="">
+                    <a href="{{ route('asignar') }}" class="menu-toggle" data-active='false'>
+                        <div class="base-menu">
+                            <div class="base-icons">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-eye">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                </svg>
+                            </div>
+                            <span>ASIGNAR</span>
                         </div>
-                        <span>ASIGNAR</span>
-                    </div>
-                </a>
-            </li>
-            {{-- @endcan --}}
-
-            <li class="">
-                <a href="{{ route('users') }}" class="menu-toggle" data-active='false'>
-                    <div class="base-menu">
-                        <div class="base-icons">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-users">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
+                    </a>
+                </li>
+            @endcan
+            @can('7. Usuario')
+                <li class="">
+                    <a href="{{ route('users') }}" class="menu-toggle" data-active='false'>
+                        <div class="base-menu">
+                            <div class="base-icons">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-users">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <span>USUARIOS</span>
                         </div>
-                        <span>USUARIOS</span>
-                    </div>
-                </a>
-            </li>
-
-            <li class="">
-                <a href="{{ route('coins') }}" class="menu-toggle" data-active='false'>
-                    <div class="base-menu">
-                        <div class="base-icons">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-dollar-sign">
-                                <line x1="12" y1="1" x2="12" y2="23"></line>
-                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                            </svg>
+                    </a>
+                </li>
+            @endcan
+            @can('8. Tab Moneda')
+                <li class="">
+                    <a href="{{ route('coins') }}" class="menu-toggle" data-active='false'>
+                        <div class="base-menu">
+                            <div class="base-icons">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-dollar-sign">
+                                    <line x1="12" y1="1" x2="12" y2="23"></line>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                </svg>
+                            </div>
+                            <span>MONEDAS</span>
                         </div>
-                        <span>MONEDAS</span>
-                    </div>
-                </a>
-            </li>
-
-            <li class="">
-                <a href="{{ route('cashout') }}" class="menu-toggle" data-active='false'>
-                    <div class="base-menu">
-                        <div class="base-icons">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-hard-drive">
-                                <line x1="22" y1="12" x2="2" y2="12"></line>
-                                <path
-                                    d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
-                                </path>
-                                <line x1="6" y1="16" x2="6.01" y2="16"></line>
-                                <line x1="10" y1="16" x2="10.01" y2="16"></line>
-                            </svg>
+                    </a>
+                </li>
+            @endcan
+            @can('9. Tab Cierre de Caja')
+                <li class="">
+                    <a href="{{ route('cashout') }}" class="menu-toggle" data-active='false'>
+                        <div class="base-menu">
+                            <div class="base-icons">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-hard-drive">
+                                    <line x1="22" y1="12" x2="2" y2="12"></line>
+                                    <path
+                                        d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
+                                    </path>
+                                    <line x1="6" y1="16" x2="6.01" y2="16"></line>
+                                    <line x1="10" y1="16" x2="10.01" y2="16"></line>
+                                </svg>
+                            </div>
+                            <span>CIERRE DE CAJA</span>
                         </div>
-                        <span>CIERRE DE CAJA</span>
-                    </div>
-                </a>
-            </li>
-
-            <li class="">
-                <a href="{{ route('reports') }}" class="menu-toggle" data-active='false'>
-                    <div class="base-menu">
-                        <div class="base-icons">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-activity">
-                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                            </svg>
+                    </a>
+                </li>
+            @endcan
+            @can('10. Reporte')
+                <li class="">
+                    <a href="{{ route('reports') }}" class="menu-toggle" data-active='false'>
+                        <div class="base-menu">
+                            <div class="base-icons">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" class="feather feather-activity">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                </svg>
+                            </div>
+                            <span>REPORTES</span>
                         </div>
-                        <span>REPORTES</span>
-                    </div>
-                </a>
-            </li>
+                    </a>
+                </li>
+            @endcan
 
         </ul>
     </nav>

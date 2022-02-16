@@ -83,7 +83,7 @@ class PermissionSeeder extends Seeder
             '2.2 Editar Producto',
             '2.3 Eliminar Producto',
             '3. Tab Ventas',
-            '3.1 Crear Ventas',
+            '3.1 Venta Denominaciones',
             '4. Tab Rol',
             '4.1 Crear Rol',
             '4.2 Editar Rol',

@@ -113,7 +113,7 @@ class Users extends Component
         $user->syncRoles($this->profile);
 
         if($this->image){
-            $customFileName = uniqui() . '_.' . $this->image->extension();
+            $customFileName = uniqid() . '_.' . $this->image->extension();
             $this->image->storeAs('public/users', $customFileName);
             $user->image = $customFileName;
             $user->save();
@@ -159,7 +159,7 @@ class Users extends Component
         $user->syncRoles($this->profile);
 
         if($this->image){
-            $customFileName = uniqui() . '_.' . $this->image->extension();
+            $customFileName = uniqid() . '_.' . $this->image->extension();
             $this->image->storeAs('public/users', $customFileName);
             $imageTemp = $user->image;
             $user->image = $customFileName;
