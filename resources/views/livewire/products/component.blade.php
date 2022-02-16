@@ -5,6 +5,7 @@
                 <h4 class="card-title">
                     <b>{{$componentName}} | {{$pageTitle}}</b>
                 </h4>
+                @can('2.1 Crear Producto')
                 <ul class="tabs tab-pills">
                     <li>
                         <a href="javascript:void(0)"
@@ -15,6 +16,7 @@
                         </a>
                     </li>
                 </ul>
+                @endcan
             </div>
             @include('common.searchbox')
 

@@ -27,7 +27,7 @@ class Pos extends Component
     {
         return view('livewire.pos.component', [
             'denominations' => Denomination::orderBy('value','desc')->get(),
-            'cart' => Cart::getContent()->sortBy('name'),
+            'cart' => Cart::getContent()->sortBy('name')
         ])
         ->extends('layouts.theme.app')
         ->section('content');
@@ -73,7 +73,7 @@ class Pos extends Component
                 return;
             }
 
-            Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
+            Cart::add($product->id, $product->name, $product->price, $cant); // agregar , $product->image
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
             $this->emit('scan-ok','Producto Agregado');
@@ -110,7 +110,7 @@ class Pos extends Component
             }
         }
 
-        Cart::add($product->id, $product->name, $product->price, $cant, $product->image);
+        Cart::add($product->id, $product->name, $product->price, $cant); //agregar $product->image
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
 
@@ -162,11 +162,11 @@ class Pos extends Component
         $item = Cart::get($id);
         Cart::remove($id);
 
-        $img = (count($item->attributes)> 0 ? $item->attributes[0] : Product::find($id)->imagen);
+        // $img = (count($item->attributes)> 0 ? $item->attributes[0] : Product::find($id)->imagen);
 
         $newQty = ($item->quantity) - 1;
         if($newQty > 0)
-            Cart::add($item->id, $item->name, $item->price, $newQty, $img);
+            Cart::add($item->id, $item->name, $item->price, $newQty); //agregar $img
 
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();

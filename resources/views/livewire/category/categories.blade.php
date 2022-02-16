@@ -6,7 +6,7 @@
                     <b> {{ $componentName }} | {{ $pageTitle }}</b>
                 </h4>
                 <ul class="tabs tab-pills">
-                    @can('1.1 Crear_Categoria')
+                    @can('1.1 Crear Categoria')
                         <li>
                             <a href="javascript:void(0)" class="tabmenu bg-dark" data-toggle="modal" data-target="#theModal"
                                 style="text-decoration: none">Agregar</a>
@@ -38,13 +38,13 @@
                                         </span>
                                     </td>
                                     <td class="text-center">
-                                        @can('1.2 Editar_Categoria')
+                                        @can('1.2 Editar Categoria')
                                             <a href="javascript:void(0)" wire:click="Edit({{ $category->id }})"
                                                 class="btn btn-dark mtmobile" title="Edit">
                                                 <i class="fas fa-edit"></i>
                                             </a>
                                         @endcan
-                                        @can('1.3 Eliminar_Categoria')
+                                        @can('1.3 Eliminar Categoria')
                                             <a href="javascript:void(0)"
                                                 onclick="Confirm('{{ $category->id }}','{{ $category->products->count() }}')"
                                                 class="btn btn-dark " title="Delete">

@@ -7,10 +7,10 @@
                     <table class="table table-bordered table-striped mt-1">
                         <thead class="text-white" style="background: #3B3F5C">
                             <tr>
-                                <th width="10%"></th>
+                                {{-- <th width="10%"></th> --}}
                                 <th class="table-th text-left text-white">DESCRIPCION</th>
                                 <th class="table-th text-center text-white">PRECIO</th>
-                                <th width="13%" class="table-th text-center text-white">CANT.</th>
+                                <th width="15%" class="table-th text-center text-white">CANT.</th>
                                 <th class="table-th text-center text-white">IMPORTE</th>
                                 <th class="table-th text-center text-white">ACTIONS</th>
                             </tr>
@@ -18,17 +18,18 @@
                         <tbody>
                             @foreach ($cart as $item)
                             <tr>
-                                <td class="text-center table-th">
+                                {{-- <td class="text-center table-th">
                                     @if(count($item->attributes) > 0)
                                     <span>
                                         <img src="{{ asset('storage/products/' . $item->attributes[0]) }}" alt="Sin Imagen" height="30" width="40" class="rounded">
                                     </span>
                                     @endif
-                                </td>
+                                </td> --}}
                                 <td><h6>{{$item->name}}</h6></td>
                                 <td class="text-center">${{number_format($item->price,2)}}</td>
                                 <td>
-                                    <input type="number" id="r{{$item->id}}"
+                                    {{-- para habilitar los botones de incrementar el campo colocar type="number" --}}
+                                    <input type="text" id="r{{$item->id}}"
                                     wire:change="updateQty({{$item->id}}, $('#r' + {{$item->id}}).val())"
                                     style="font-size: 1rem!important"
                                     {{-- height="30" width="40" --}}

@@ -2,7 +2,7 @@
     <nav id='compactSidebar'>
 
         <ul class="menu-categories">
-            @can('1. Categoria')
+            @can('1. Tab Categoria')
                 <li class="active">
                     <a href="{{ route('categorias') }}" class="menu-toggle" data-active='true'>
                         <div class="base-menu">
@@ -21,7 +21,7 @@
                     </a>
                 </li>
             @endcan
-            @can('2. Producto')
+            @can('2. Tab Producto')
                 <li class="">
                     <a href="{{ route('productos') }}" class="menu-toggle" data-active='false'>
                         <div class="base-menu">
@@ -41,7 +41,7 @@
                     </a>
                 </li>
             @endcan
-            {{-- @can('3. Ventas') --}}
+            @can('3. Tab Venta')
                 <li class="">
                     <a href="{{ route('pos') }}" class="menu-toggle" data-active='false'>
                         <div class="base-menu">
@@ -59,8 +59,8 @@
                         </div>
                     </a>
                 </li>
-            {{-- @endcan
-            @can('4. Roles') --}}
+            @endcan
+            {{-- @can('4. Roles') --}}
                 <li class="">
                     <a href="{{ route('roles') }}" class="menu-toggle" data-active='false'>
                         <div class="base-menu">
