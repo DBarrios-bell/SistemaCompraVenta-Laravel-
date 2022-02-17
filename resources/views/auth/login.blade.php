@@ -1,103 +1,71 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>Sistema de Ventas</title>
-    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-    <!-- BEGIN GLOBAL MANDATORY STYLES -->
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&display=swap" rel="stylesheet">
-    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/plugins.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('assets/css/structure.css') }}" rel="stylesheet" type="text/css" class="structure" />
-    <link href="{{ asset('assets/css/authentication/form-1.css') }}" rel="stylesheet" type="text/css" />
-    <!-- END GLOBAL MANDATORY STYLES -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/theme-checkbox-radio.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/forms/switches.css') }}">
-</head>
-
-<body class="form">
-
-    <div class="form-container">
+@extends('layouts.theme.login')
+@section('content')
+    <div class="form-container container" style="text-align: center">
         <div class="form-form" style="background-color: #a5c0fe; border-radius: 10%">
-            <div class="form-form-wrap">
-                <div class="form-container">
-                    <div class="form-content container">
-                        <form method="POST" action="{{ route('login') }}">
+            <div class="form-form-wrap" style="padding: 2%">
+                <div class="form-content ">
+                    <br>
+                    <h1 class="text-center"><span class=""><b>Sistema de
+                                Ventas</b></span></h1>
+                    <form class="text-left mt-5" action="{{ route('login') }}" method="POST">
                         @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-lg-8 col-md-5 col-form-label text-md-end">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-lg-12 col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+                        <div class="form">
+                            <div id="username-field" class="input mt-5">
+                                <input id="email" name="email" type="email"
+                                    class="form-control @error('email') is-invalid @enderror"
+                                    placeholder="Correo Electronico" value="{{ old('email') }}" required
+                                    autocomplete="email" autofocus>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-lg-12 col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
+                            <div id="password-field" class="input mt-5">
+                                <input id="password" name="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" placeholder="Password"
+                                    required autocomplete="current-password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <div class="col-lg-12 col-md-6 offset-md-0">
+                            {{-- <div class="row mb-3"> --}}
+                            <div class="col-md-6 mt-5">
                                 <div class="form-check">
-                                    <input class="form-check-input  offset-md-0" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label  col-lg-12" for="remember">
-                                        {{ __('Recordar Contraseña') }}
+                                    <label class="form-check-label text-dark" for="remember" >
+                                        {{ __('Remember Me') }}
                                     </label>
                                 </div>
-                            </div>
+                            {{-- </div> --}}
                         </div>
-
-                        <div class="row mb-3">
-                            <div class="col-lg-12 col-md-8  offset-md-0">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
+                            <br><br>
+                            <div class="field mt-3">
+                                <button type="submit" class="btn btn-dark btn-block" value="">Iniciar Sesion</button>
                             </div>
-                            @if (Route::has('password.request'))
-                                <a href="{{ route('password.request') }}">
-                                    {{ __('Olvidaste tu contraseña?') }}
-                                </a>
-                            @endif
                         </div>
                     </form>
-                    </div>
+                    <p style="padding: 0%" class="terms-conditions text-center">© 2022 All Rights Reserved. <a
+                            href="#">Devinson B.</a> <br>versión 1.0</p>
                 </div>
+                </form>
             </div>
         </div>
-        <div class="form-image" style="padding: 2%">
-            @if (Route::has('password.request'))
-                <a class="btn btn-dark lg-6" style="" href="{{ route('password.request') }}">
-                    {{ __('Olvidaste tu Contraseña?') }}
-                </a>
-            @endif
+        <div class="form-image col-md-6 col-sm-3 form-container container mt-3">
+            <div class="justify-content-center">
+                @if (Route::has('password.request'))
+                    <a class="btn btn-link" style="width: 60%; height: 90%"
+                        href="{{ route('password.request') }}">
+                        {{ __('Olvidaste tu Contraseña?') }}
+                    </a>
+                @endif
+            </div>
             <video class="video-fluid" autoplay loop muted>
                 <source src="video/video.mp4" type="video/mp4" />
             </video>
         </div>
     </div>
-
-</body>
-
-</html>
+@endsection

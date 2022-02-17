@@ -20,14 +20,14 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
 // Protege la ruta validando q el usuario este registrado
 Route::middleware(['auth'])->group(function(){
     Route::get('categories', Categories::class)->name('categorias');
     Route::get('products', Products::class)->name('productos');
     Route::get('coins', Coins::class)->name('coins')->middleware('role:Administrador'); //protegiendo solo una ruta
-    Route::get('pos', Pos::class)->name('pos');
+    Route::get('/', Pos::class)->name('pos');
 
     //protege las de los usuario que no tiene el rol
     Route::group(['middleware' => ['role:Administrador']], function(){

@@ -1,6 +1,7 @@
 <div class="header-container fixed-top">
     <header class="header navbar navbar-expand-sm">
-        <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg
+        <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom">
+            <svg
                 xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                 class="feather feather-list">
@@ -13,7 +14,7 @@
             </svg></a>
         <ul class="navbar-item flex-row">
             <li class="nav-item theme-logo">
-                <a href="{{ route('index') }}" width="15" height="15" style="text-decoration: none">
+                <a href="{{ route('pos') }}" width="15" height="15" style="text-decoration: none">
                     <img src="assets/img/add2.png" class="navbar-logo" alt="logo"><b
                         style="font-size: 22px; color: #3B3F5C">{{ config('app.name') }}</b>
                 </a>
@@ -196,10 +197,10 @@
                         aria-labelledby="userProfileDropdown">
                         <div class="user-profile-section">
                             <div class="media mx-auto">
-                                <img src="assets/img/add3.png" class="img-fluid mr-2" alt="avatar">
+                                    {{-- <img src=" {{asset('storage/users/' )}} . {{Auth::user()->image}}" height="30" width="40" class="rounded" class="card-img-top img-fluid"> --}}
                                 <div class="media-body">
-                                    <h5>Alan Green</h5>
-                                    <p>Project Leader</p>
+                                    <h5>{{ auth()->user()->name}}</h5>
+                                    <p>{{ auth()->user()->profile}}</p>
                                 </div>
                             </div>
                         </div>
@@ -226,7 +227,6 @@
                             <a class="nav-link" href="#" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
 
-
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="feather feather-log-out">
@@ -234,8 +234,6 @@
                                     <polyline points="16 17 21 12 16 7"></polyline>
                                     <line x1="21" y1="12" x2="9" y2="12"></line>
                                 </svg>
-
-
                                 <span>Log Out</span>
                             </a>
                         </div>
