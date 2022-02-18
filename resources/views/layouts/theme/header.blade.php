@@ -15,15 +15,14 @@
         <ul class="navbar-item flex-row">
             <li class="nav-item theme-logo">
                 <a href="{{ route('pos') }}" width="15" height="15" style="text-decoration: none">
-                    <img src="assets/img/add2.png" class="navbar-logo" alt="logo"><b
-                        style="font-size: 22px; color: #3B3F5C">{{ config('app.name') }}</b>
+                    <img src="assets/img/add2.png" class="navbar-logo" alt="logo">
+                    <b style="font-size: 22px; color: #3B3F5C">{{ config('app.name') }}</b>
                 </a>
             </li>
         </ul>
 
-
         <livewire:search>
-
+            @auth
             <ul class="navbar-item flex-row navbar-dropdown">
                 {{-- <li class="nav-item dropdown language-dropdown more-dropdown">
                     <div class="dropdown  custom-dropdown-icon">
@@ -238,8 +237,15 @@
                             </a>
                         </div>
                     </div>
+                    @else
+                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id=""
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="{{route('login')}}"> <b>Iniciar Sesión</b></a>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                    </a>
                 </li>
             </ul>
+            @endauth
     </header>
 </div>
 
