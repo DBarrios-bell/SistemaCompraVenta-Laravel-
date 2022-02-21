@@ -8,6 +8,7 @@ use App\http\Livewire\Coins;
 use App\http\Livewire\Permisos;
 use App\http\Livewire\Pos;
 use App\http\Livewire\Products;
+use App\Http\Livewire\Providers;
 use App\http\Livewire\Reports;
 use App\http\Livewire\Roles;
 use App\Http\Livewire\Shopping;
@@ -38,6 +39,7 @@ Route::middleware(['auth'])->group(function(){
         Route::get('asignar', Asignar::class)->name('asignar');
     });
     Route::get('users', Users::class)->name('users');
+    Route::get('providers', Providers::class)->name('providers');
     Route::get('cashout', Cashout::class)->name('cashout');
     Route::get('reports', reports::class)->name('reports');
 

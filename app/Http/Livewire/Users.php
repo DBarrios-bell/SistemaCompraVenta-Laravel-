@@ -15,7 +15,7 @@ class Users extends Component
     use WithFileUploads;
 
     public $name, $phone, $email, $status, $image, $password, $selected_id, $fileLoaded, $profile, $pageTitle, $componentName, $search;
-    private $pagination = 3;
+    private $pagination = 5;
 
     public function paginationView()
     {

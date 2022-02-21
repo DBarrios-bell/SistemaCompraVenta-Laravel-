@@ -29,7 +29,7 @@ class PermissionSeeder extends Seeder
 
         //sales
         Permission::create(['name' => '3. Tab Ventas']);
-        Permission::create(['name' => '3.1 Crear Ventas']);
+        Permission::create(['name' => '3.1 Venta Denominaciones']);
 
         //roles
         Permission::create(['name' => '4. Tab Rol']);
