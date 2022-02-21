@@ -1,21 +1,15 @@
 @auth
     <div class="sidebar-wrapper sidebar-theme">
         <nav id='compactSidebar'>
-
             <ul class="menu-categories">
                 @can('1. Tab Categoria')
                     <li class="active">
                         <a href="{{ route('categorias') }}" class="menu-toggle" data-active='true'>
                             <div class="base-menu">
                                 <div class="base-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-grid">
-                                        <rect x="3" y="3" width="7" height="7"></rect>
-                                        <rect x="14" y="3" width="7" height="7"></rect>
-                                        <rect x="14" y="14" width="7" height="7"></rect>
-                                        <rect x="3" y="14" width="7" height="7"></rect>
-                                    </svg>
+                                    <lord-icon src="https://cdn.lordicon.com/jvucoldz.json" trigger="loop-on-hover"
+                                        colors="primary:#ffffff,secondary:#07a889" style="width:70px;height:70px">
+                                    </lord-icon>
                                 </div>
                                 <span>CATEGORIAS</span>
                             </div>
@@ -27,15 +21,9 @@
                         <a href="{{ route('productos') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-codepen">
-                                        <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"></polygon>
-                                        <line x1="12" y1="22" x2="12" y2="15.5"></line>
-                                        <polyline points="22 8.5 12 15.5 2 8.5"></polyline>
-                                        <polyline points="2 15.5 12 8.5 22 15.5"></polyline>
-                                        <line x1="12" y1="2" x2="12" y2="8.5"></line>
-                                    </svg>
+                                    <lord-icon src="https://cdn.lordicon.com/itmmouju.json" trigger="loop-on-hover"
+                                        colors="primary:#ffffff,secondary:#07a889" style="width:70px;height:70px">
+                                    </lord-icon>
                                 </div>
                                 <span>PRODUCTOS</span>
                             </div>
@@ -47,14 +35,10 @@
                         <a href="{{ route('pos') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-tag">
-                                        <path
-                                            d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z">
-                                        </path>
-                                        <line x1="7" y1="7" x2="7.01" y2="7"></line>
-                                    </svg>
+                                    <lord-icon src="https://assets2.lottiefiles.com/packages/lf20_igjaezoi.json"
+                                        trigger="loop-on-hover" colors="primary:#ffffff,secondary:#08a88a"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
                                 </div>
                                 <span>VENTAS</span>
                             </div>
@@ -62,36 +46,29 @@
                     </li>
                 @endcan
                 {{-- @can('11. Compras') --}}
-                    <li class="">
-                        <a href="#" class="menu-toggle" data-active='false'>
-                            <div class="base-menu">
-                                <div class="base-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-tag">
-                                        <path
-                                            d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z">
-                                        </path>
-                                        <line x1="7" y1="7" x2="7.01" y2="7"></line>
-                                    </svg>
-                                </div>
-                                <span>COMPRAS</span>
+                <li class="">
+                    <a href="{{route('shopping')}}" class="menu-toggle" data-active='false'>
+                        <div class="base-menu">
+                            <div class="base-icons">
+                                <lord-icon src="https://assets7.lottiefiles.com/packages/lf20_tbn1qghe.json"
+                                    trigger="loop-on-hover" colors="primary:#ffffff,secondary:#08a88a"
+                                    style="width:70px;height:70px">
+                                </lord-icon>
                             </div>
-                        </a>
-                    </li>
+                            <span>COMPRAS</span>
+                        </div>
+                    </a>
+                </li>
                 {{-- @endcan --}}
                 @can('4. Tab Rol')
                     <li class="">
                         <a href="{{ route('roles') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-key">
-                                        <path
-                                            d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4">
-                                        </path>
-                                    </svg>
+                                    <lord-icon src="https://assets7.lottiefiles.com/packages/lf20_z2itipsu.json"
+                                        trigger="loop-on-hover" colors="primary:#ffffff,secondary:#08a88a"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
                                 </div>
                                 <span>ROLES</span>
                             </div>
@@ -103,12 +80,10 @@
                         <a href="{{ route('permisos') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-check-square">
-                                        <polyline points="9 11 12 14 22 4"></polyline>
-                                        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                                    </svg>
+                                    <lord-icon src="https://assets8.lottiefiles.com/packages/lf20_n7s94b5h.json"
+                                        trigger="loop-on-hover" colors="primary:#ffffff,secondary:#08a88a"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
                                 </div>
                                 <span>PERMISOS</span>
                             </div>
@@ -120,12 +95,10 @@
                         <a href="{{ route('asignar') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-eye">
-                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                        <circle cx="12" cy="12" r="3"></circle>
-                                    </svg>
+                                    <lord-icon src="https://assets10.lottiefiles.com/packages/lf20_h4gyvywo.json"
+                                        trigger="loop-on-hover" colors="primary:#ffffff,secondary:#08a88a"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
                                 </div>
                                 <span>ASIGNAR</span>
                             </div>
@@ -137,14 +110,10 @@
                         <a href="{{ route('users') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-users">
-                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                        <circle cx="9" cy="7" r="4"></circle>
-                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                    </svg>
+                                    <lord-icon src="https://assets1.lottiefiles.com/packages/lf20_umcyeafh.json"
+                                        trigger="loop-on-hover" colors="primary:#07a889,secondary:#ffffff"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
                                 </div>
                                 <span>USUARIOS</span>
                             </div>
@@ -156,12 +125,10 @@
                         <a href="{{ route('coins') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-dollar-sign">
-                                        <line x1="12" y1="1" x2="12" y2="23"></line>
-                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                                    </svg>
+                                    <lord-icon src="https://assets7.lottiefiles.com/packages/lf20_ltgagxzo.json"
+                                        trigger="loop-on-hover" colors="primary:#ffffff,secondary:#08a88a"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
                                 </div>
                                 <span>MONEDAS</span>
                             </div>
@@ -173,16 +140,10 @@
                         <a href="{{ route('cashout') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="feather feather-hard-drive">
-                                        <line x1="22" y1="12" x2="2" y2="12"></line>
-                                        <path
-                                            d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z">
-                                        </path>
-                                        <line x1="6" y1="16" x2="6.01" y2="16"></line>
-                                        <line x1="10" y1="16" x2="10.01" y2="16"></line>
-                                    </svg>
+                                    <lord-icon src="https://assets9.lottiefiles.com/packages/lf20_a017jgau.json"
+                                        trigger="loop-on-hover" colors="primary:#ffffff,secondary:#08a88a"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
                                 </div>
                                 <span>CIERRE DE CAJA</span>
                             </div>
@@ -194,12 +155,14 @@
                         <a href="{{ route('reports') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
-                                    <script src="https://cdn.lordicon.com/lusqsztk.js"></script>
-                                    <lord-icon src="https://cdn.lordicon.com/gqdnbnwt.json" trigger="loop-on-hover"
-                                        colors="primary:#be6885,secondary:#08a88a" style="width:70px;height:70px">
+                                    <lord-icon src="https://assets5.lottiefiles.com/packages/lf20_g4rf74et.json"
+                                        trigger="loop-on-hover" colors="primary:#ffffff,secondary:#08a88a"
+                                        style="width:70px;height:70px">
                                     </lord-icon>
                                 </div>
-                                <h6>REPORTES</h6>
+                                <span>
+                                    <h6>REPORTES</h6>
+                                </span>
                             </div>
                         </a>
                     </li>
@@ -211,3 +174,5 @@
     <div id="compact_submenuSidebar" class="submenu-sidebar" style="display: none!important">
     </div>
 @endauth
+
+<script src="https://cdn.lordicon.com/lusqsztk.js"></script>

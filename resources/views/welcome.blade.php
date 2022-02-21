@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <video src="{{asset ('video\sales')}}"></video>
 </body>
 </html>

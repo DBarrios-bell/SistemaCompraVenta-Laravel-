@@ -7,10 +7,12 @@ use App\Models\User;
 use App\Models\Sale;
 use App\Models\SaleDetails;
 use Carbon\Carbon;
+use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class Reports extends Component
 {
-    public $componentName, $data, $details, $sumDetails, $countDetails, $reportType, $userId, $dateFrom, $dateTo, $saleId;
+    public $componentName, $data, $details, $sumDetails, $countDetails, $reportType, $userId, $dateFrom, $dateTo, $saleId, $sale;
 
     public function mount()
     {
@@ -31,6 +33,10 @@ class Reports extends Component
         ])->extends('layouts.theme.app')
         ->section('content');
     }
+
+        protected $listeners = [
+        'cancelSale' => 'cancelSale'
+    ];
 
     public function SalesByDate()
     {
@@ -78,5 +84,13 @@ class Reports extends Component
         $this->saleId = $saleId;
 
         $this->emit('show-modal', 'details loaded');
+    }
+
+        public function cancelSale($saleId)
+    {
+        $affected = DB::table('sales')
+              ->where('id', $saleId)
+              ->update(['status' => 'Cancelado']);
+        return $affected;
     }
 }

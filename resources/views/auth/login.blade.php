@@ -7,8 +7,7 @@
                     <br>
                     <h1 class="text-center form-wrap"
                         style="color: #F7F8FF; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 50px""><span class="
-                        "><b>Sistema de
-                            Ventas</b></span></h1>
+                        "><b>Sistema de Ventas</b></span></h1>
                     <form class="text-left mt-5" action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="form">

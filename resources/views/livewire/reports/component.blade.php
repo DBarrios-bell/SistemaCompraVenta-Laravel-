@@ -69,7 +69,8 @@
                                         <th class="table-th text-white text-center">STATUS</th>
                                         <th class="table-th text-white text-center">USUARIO</th>
                                         <th class="table-th text-white text-center">FECHA</th>
-                                        <th class="table-th text-white text-center" width="50px"></th>
+                                        <th class="table-th text-white text-center" width="60px"></th>
+                                        <th class="table-th text-white text-center" width="60px"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -104,7 +105,15 @@
                                                 <h6>
                                                     <button wire:click.prevent="getDetails({{ $d->id }})"
                                                         class="btn btn-dark btn-sm">
-                                                        <i class="fas fa-list"></i>
+                                                        <i class="fas fa-list"> Detalle</i>
+                                                    </button>
+                                                </h6>
+                                            </td>
+                                            <td class="text-center" width="50px">
+                                                <h6>
+                                                    <button wire:click.prevent="cancelSale({{ $d->id }})"
+                                                        class="btn btn-dark btn-sm">
+                                                        <i class="fas fa-trash"> Eliminar</i>
                                                     </button>
                                                 </h6>
                                             </td>
