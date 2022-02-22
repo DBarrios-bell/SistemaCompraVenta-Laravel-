@@ -11,7 +11,7 @@ use App\http\Livewire\Products;
 use App\Http\Livewire\Providers;
 use App\http\Livewire\Reports;
 use App\http\Livewire\Roles;
-use App\Http\Livewire\Shopping;
+use App\Http\Livewire\Buy;
 use App\http\Livewire\Users;
 use Illuminate\Support\Facades\Route;
 
@@ -30,7 +30,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('products', Products::class)->name('productos');
     Route::get('coins', Coins::class)->name('coins')->middleware('role:Administrador'); //protegiendo solo una ruta
     Route::get('/', Pos::class)->name('pos');
-    Route::get('shopping', Shopping::class)->name('shopping');
+    Route::get('buy', Buy::class)->name('buy');
 
     //protege las de los usuario que no tiene el rol
     Route::group(['middleware' => ['role:Administrador']], function(){

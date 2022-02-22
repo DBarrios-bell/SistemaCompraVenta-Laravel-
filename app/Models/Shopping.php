@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Shopping extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'total',
+        'items',
+        'cash',
+        'change',
+        'status',
+        'user_id',
+        'provider_id'
+    ];
 }

@@ -26,6 +26,7 @@ class Products extends Component
         $this->pageTitle = 'Listado';
         $this->componentName = 'Productos';
         $this->categoryid = 'Elegir';
+        $this->stock = 0;
     }
 
     public function cleanValue($value)
@@ -64,7 +65,6 @@ class Products extends Component
             'name' => 'required|unique:products|min:3',
             'cost' => 'required',
             'price' => 'required',
-            'stock' => 'required',
             'barcode' => 'required|unique:products',
             'alerts' => 'required',
             'categoryid' => 'required|not_in:Elegir',
@@ -75,7 +75,6 @@ class Products extends Component
             'mane.min' => 'El nombre debe tener minino 3 caracteres',
             'cost.required' => 'El costo es requerido',
             'price.required' => 'El precio es requerido',
-            'stock.required' => 'El stock es requerido',
             'barcode.required' => 'Campo Obligatori',
             'barcode.unique' => 'Ya existe el codigo',
             'alerts.required' => 'Ingresa el valor minimo en existencias',
@@ -111,7 +110,7 @@ class Products extends Component
             $this->barcode = $product->barcode;
             $this->cost = $product->cost;
             $this->price = $product->price;
-            $this->stock = $product->stock;
+            // $this->stock = $product->stock;
             $this->alerts = $product->alerts;
             $this->categoryid = $product->category_id;
             $this->image = null;
@@ -122,20 +121,19 @@ class Products extends Component
 
     public function Update(){
         $rules = [
-            'name' => "required|min:3|unique:products,name,{$this->selected_id}",
+            'name' => "required|min:3,{$this->selected_id}",
             'cost' => 'required',
             'price' => 'required',
-            'stock' => 'required',
+            // 'stock' => 'required',
             'alerts' => 'required',
             'categoryid' => 'required|not_in:Elegir',
         ];
         $messages =[
             'name.required' => 'Nombre del producto requerido',
-            'name.unique' => 'Ya existe el nombre del producto',
             'mane.min' => 'El nombre debe tener minino 3 caracteres',
             'cost.required' => 'El costo es requerido',
             'price.required' => 'El precio es requerido',
-            'stock.required' => 'El stock es requerido',
+            // 'stock.required' => 'El stock es requerido',
             'alerts.required' => 'Ingresa el valor minimo en existencias',
             'categoryid.not_in' => 'Elige un nombre de categoria diferente a Elegir',
         ];
@@ -148,7 +146,7 @@ class Products extends Component
             'cost' => $this->cleanValue($this->cost),
             'price' => $this->cleanValue($this->price),
             'barcode' => $this->barcode,
-            'stock' => $this->stock,
+            // 'stock' => $this->stock,
             'alerts' => $this->alerts,
             'category_id' => $this->categoryid
         ]);

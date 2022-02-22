@@ -18,13 +18,6 @@
                         <tbody>
                             @foreach ($cart as $item)
                             <tr>
-                                {{-- <td class="text-center table-th">
-                                    @if(count($item->attributes) > 0)
-                                    <span>
-                                        <img src="{{ asset('storage/products/' . $item->attributes[0]) }}" alt="Sin Imagen" height="30" width="40" class="rounded">
-                                    </span>
-                                    @endif
-                                </td> --}}
                                 <td><h6>{{$item->name}}</h6></td>
                                 <td class="text-center">${{number_format($item->price,2)}}</td>
                                 <td>

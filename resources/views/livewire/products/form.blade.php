@@ -32,7 +32,8 @@
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
             <label>Stock</label>
-            <input type="number" wire:model.lazy='stock' class="form-control" placeholder="Ej: 0">
+            {{-- agregar wire:model.lazy='stock' para poder modificar el stock desde el producto --}}
+            <input type="number" class="form-control" placeholder="Ej: 0" disabled>
             @error('stock') <span class="text-danger er">{{$message}}</span>@enderror
         </div>
     </div>
@@ -45,7 +46,6 @@
     </div>
     <div class="col-sm-12 col-md-4">
         <div class="form-group">
-            <label>Stock</label>
             <label for="">Categoria</label>
             <select wire:model='categoryid' class="form-control">
                 <option value="Elegir" disabled>Elegir</option>

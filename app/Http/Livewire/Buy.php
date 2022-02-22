@@ -5,15 +5,16 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use App\Models\Product;
-use App\Models\Sale;
-use App\Models\SaleDetails;
+use App\Models\Shopping;
+use App\Models\ShoppingDetails;
 use App\Models\Denomination;
+use App\Models\Provider;
 use DB;
 
-class Shopping extends Component
+class Buy extends Component
 {
 
-    public $total, $itemsQuantity, $efectivo, $change, $cant;
+    public $total, $itemsQuantity, $efectivo, $change, $cant, $provider_id;
 
     // inicializa las propiedades en 0
     public function mount(){
@@ -21,14 +22,15 @@ class Shopping extends Component
         $this->change = 0;
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
-
+        $this->provider_id = '0';
     }
 
     public function render()
     {
         return view('livewire.shopping.shopping', [
             'denominations' => Denomination::orderBy('value','desc')->get(),
-            'cart' => Cart::getContent()->sortBy('name')
+            'cart' => Cart::getContent()->sortBy('name'),
+            'providers' => Provider::orderBy('name', 'asc')->get()
         ])
         ->extends('layouts.theme.app')
         ->section('content');
@@ -46,12 +48,12 @@ class Shopping extends Component
         'scan-code' => 'ScanCode',
         'removeItem' => 'removeItem',
         'clearCart' => 'clearCart',
-        'saveSale' => 'saveSale',
+        'shoppingSale' => 'shoppingSale',
         'refresh' => '$refresh',
-        'print-last' => 'printLast'
+        // 'print-last' => 'printLast'
     ];
 
-    
+
         // recibe el codigo de barra escaneado y lo agrega al carrito
     public function ScanCode($barcode, $cant = 1)
     {
@@ -68,12 +70,6 @@ class Shopping extends Component
                 $this->increaseQty($product->id);
                 return;
             }
-
-            // if($product->stock < 1)
-            // {
-            //     $this->emit('no-stock','Stock Insuficiente :/');
-            //     return;
-            // }
 
             Cart::add($product->id, $product->name, $product->price, $cant); // agregar , $product->image
             $this->total = Cart::getTotal();
@@ -103,15 +99,6 @@ class Shopping extends Component
         else
             $title = 'Producto Agregado';
 
-        if($exist)
-        {
-            if($product->stock < ($cant + $exist->quantity))
-            {
-                $this->emit('no-stock','Stock Insuficiente :/');
-                return;
-            }
-        }
-
         Cart::add($product->id, $product->name, $product->price, $cant); //agregar $product->image
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
@@ -130,14 +117,7 @@ class Shopping extends Component
         else
             $title = 'Producto Agregado';
 
-        if($exist)
-        {
-            if($product->stock < $cant)
-            {
-                $this->emit('no-stock','Stock Insuficiente :/');
-                return;
-            }
-        }
+
         $this->removeItem($productId);
 
         if($cant > 0)
@@ -164,8 +144,6 @@ class Shopping extends Component
         $item = Cart::get($id);
         Cart::remove($id);
 
-        // $img = (count($item->attributes)> 0 ? $item->attributes[0] : Product::find($id)->imagen);
-
         $newQty = ($item->quantity) - 1;
         if($newQty > 0)
             Cart::add($item->id, $item->name, $item->price, $newQty); //agregar $img
@@ -189,7 +167,7 @@ class Shopping extends Component
     }
 
     // guardar ventas
-    public function saveSale()
+    public function shoppingSale()
     {
         if($this->total <= 0)
         {
@@ -206,29 +184,34 @@ class Shopping extends Component
             $this->emit('sale-error','El efectivo debe ser mayor o igual al total');
             return;
         }
+        if($this->provider_id <= 0){
+            $this->emit('sale-error', 'Seleccione un Proveedor');
+            return;
+        }
 
         DB::beginTransaction();
         try{
-            $sale = Sale::create([
+            $shopping = Shopping::create([
                 'total' => $this->total,
                 'items' => $this->itemsQuantity,
                 'cash' => $this->efectivo,
                 'change' => $this->change,
-                'user_id' => Auth()->user()->id
+                'user_id' => Auth()->user()->id,
+                'provider_id' => $this->provider_id
             ]);
-            if($sale)
+            if($shopping)
             {
                 $items = Cart::getContent();
                 foreach($items as $item){
-                    SaleDetails::create([
+                    ShoppingDetails::create([
                         'price' => $item->price,
                         'quantity' => $item->quantity,
                         'product_id' => $item->id,
-                        'sale_id' => $sale->id,
+                        'shopping_id' => $shopping->id,
                     ]);
                     // update stock
                     $product = Product::find($item->id);
-                    $product->stock = $product->stock - $item->quantity;
+                    $product->stock = $product->stock + $item->quantity;
                     $product->save();
                 }
             }
@@ -240,8 +223,9 @@ class Shopping extends Component
             $this->change =0;
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
-            $this->emit('sale-ok','Venta Resgistrada con Exito');
-            $this->emit('print-ticket',$sale->id);
+            $this->provider_id = 'Elegir';
+            $this->emit('sale-ok','Compra Resgistrada con Exito');
+            // $this->emit('print-ticket',$sale->id);
 
 
         }catch(exception $e){
