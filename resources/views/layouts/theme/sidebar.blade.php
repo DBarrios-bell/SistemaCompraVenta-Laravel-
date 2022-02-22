@@ -120,7 +120,7 @@
                         </a>
                     </li>
                 @endcan
-                {{-- @can('7. Usuario') data prueba --}}
+                {{-- @can('7. Usuario')  --}}
                     <li class="">
                         <a href="{{ route('providers') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
