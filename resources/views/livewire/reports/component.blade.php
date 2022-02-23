@@ -69,8 +69,8 @@
                                         <th class="table-th text-white text-center">STATUS</th>
                                         <th class="table-th text-white text-center">USUARIO</th>
                                         <th class="table-th text-white text-center">FECHA</th>
-                                        <th class="table-th text-white text-center" width="60px"></th>
-                                        <th class="table-th text-white text-center" width="60px"></th>
+                                        <th class="table-th text-white text-center" width="16%"></th>
+                                        {{-- <th class="table-th text-white text-center" width="60px"></th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -104,19 +104,27 @@
                                             <td class="text-center" width="50px">
                                                 <h6>
                                                     <button wire:click.prevent="getDetails({{ $d->id }})"
-                                                        class="btn btn-dark btn-sm">
-                                                        <i class="fas fa-list"> Detalle</i>
+                                                        class="btn btn-dark btn-sm" title="Detalle de Venta">
+                                                        <i class="fas fa-list"></i>
                                                     </button>
+                                                    @if ($d->status == 'Pago')
+                                                    <a href="javascript:void(0)"
+                                                        onclick="cancelSale({{ $d->id }})" class="btn btn-dark btn-sm"
+                                                        title="Revertir">
+                                                        <i class="fas fa-undo"></i>
+                                                    </a>
+                                                    @endif
                                                 </h6>
                                             </td>
-                                            <td class="text-center" width="50px">
+                                            {{-- <td class="text-center" width="50px">
                                                 <h6>
                                                     <button wire:click.prevent="cancelSale({{ $d->id }})"
                                                         class="btn btn-dark btn-sm">
-                                                        <i class="fas fa-trash"> Eliminar</i>
+                                                        <i class="fas fa-undo"> Revertir</i>
                                                     </button>
+
                                                 </h6>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -186,5 +194,26 @@
         window.livewire.on('show-modal', Msg => {
             $('#modalDetails').modal('show')
         })
+        window.livewire.on('sale-revertir', Msg => {
+            noty(Msg)
+        })
     })
+
+    function cancelSale(id) {
+        swal.fire({
+            title: 'CONFIRMA',
+            text: 'REVERTIR LA VENTA?',
+            type: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cerrar',
+            cancelButtonColor: '#2C272E',
+            confirmButtonColor: '#3b3f5c',
+            confirmButtonText: 'Aceptar',
+        }).then(function(result) {
+            if (result.value) {
+                window.livewire.emit('cancelSale', id)
+                swal.close()
+            }
+        })
+    }
 </script>

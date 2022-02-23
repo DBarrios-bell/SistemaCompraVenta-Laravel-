@@ -25,7 +25,7 @@
                                 <th class="table-th text-white">ID</th>
                                 <th class="table-th text-white text-center">NOMBRE</th>
                                 <th class="table-th text-white text-center">NIT</th>
-                                {{-- <th class="table-th text-white text-center"></th> --}}
+                                <th class="table-th text-white text-center">ESTADO</th>
                                 <th class="table-th text-white text-center">ACTIONS</th>
                             </tr>
                         </thead>
@@ -40,6 +40,9 @@
                                 </td>
                                 <td class="text-center">
                                     <h6>{{$provider->nit}}</h6>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge {{ $provider->status == 'Activo' ? 'badge-success' : 'badge-danger'}} text-uppercase">{{$provider->status}}</span>
                                 </td>
                                 <td class="text-center">
                                 {{-- @can('4.2 Editar Rol') --}}
@@ -72,29 +75,29 @@
 <script>
     document.addEventListener('DOMContentLoaded', function(){
 
-        window.livewire.on('role-added', Msg => {
+        window.livewire.on('provider-added', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
-        window.livewire.on('role-updated', Msg => {
+        window.livewire.on('provider-updated', Msg => {
             $('#theModal').modal('hide')
             noty(Msg)
         })
-        window.livewire.on('role-deleted', Msg => {
+        window.livewire.on('provider-deleted', Msg => {
+            noty(Msg, 2)
+        })
+        window.livewire.on('provider-exists', Msg => {
             noty(Msg)
         })
-        window.livewire.on('role-exists', Msg => {
-            noty(Msg)
-        })
-        window.livewire.on('role-error', Msg => {
-            noty(Msg)
+        window.livewire.on('provider-error', Msg => {
+            noty(Msg, 2)
         })
         // oculta la modal
         window.livewire.on('hide-modal', Msg => {
             $('#theModal').modal('hide')
         })
         // muestra la modal
-        window.livewire.on('show-modal', Msg => {
+        window.livewire.on('provider-show-modal', Msg => {
             $('#theModal').modal('show')
         })
         // oculta los mensajes de validacion en la modal
@@ -102,7 +105,7 @@
             $('.er').css('display', 'none');
         })
         window.livewire.on('provider-withsales', Msg =>{
-            noty(Msg)
+            noty(Msg, 2)
         })
     });
 

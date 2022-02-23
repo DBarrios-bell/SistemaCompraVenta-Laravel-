@@ -120,7 +120,7 @@
                         </a>
                     </li>
                 @endcan
-                {{-- @can('7. Usuario')  --}}
+                {{-- @can('7. Proveedor')  --}}
                     <li class="">
                         <a href="{{ route('providers') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
@@ -167,7 +167,7 @@
                 @endcan
                 @can('10. Reporte')
                     <li class="">
-                        <a href="{{ route('reports') }}" class="menu-toggle" data-active='false'>
+                        <a href="{{route('reports')}}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
                                     <lord-icon src="https://assets5.lottiefiles.com/packages/lf20_g4rf74et.json"

@@ -1,12 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
+{{-- <!DOCTYPE html>
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta charset="utf-8" />
+    <title>Disable | enable</title>
 </head>
+
 <body>
-    <video src="{{asset ('video\sales')}}"></video>
+
+    <select class="form-control select2 select2-hidden-accessible" name="grado_academico" id="grado_academico">
+        <option value="">Seleccionar un grado academico</option>
+        <option value="1">Magisteer</option>
+        <option value="2">Doctorado</option>
+        <option value="3">Posdoctorado</option>
+        <option value="4">Otros</option>
+    </select>
+    <select name="input1" id="input1">hola</select>
+
 </body>
+
 </html>
+
+<script>
+    document.querySelector("#grado_academico").addEventListener("change", function() {
+        document.querySelector('select[name="input1"]').style.display = this.value == 4 ? "block" :
+        "none";
+    });
+</script>
+
+<style>
+    select[name="input1"] {
+        display: none;
+    }
+
+</style> --}}
+
+
+
+
+{{-- ------------------------- --}}
+
+

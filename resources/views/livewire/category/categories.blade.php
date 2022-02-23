@@ -33,7 +33,7 @@
                                     </td>
                                     <td class="text-center">
                                         <span>
-                                            <img src="{{ asset('storage/categorias/' . $category->imagen) }}"
+                                            <img src="{{ asset('storage/categories/' . $category->imagen) }}"
                                                 alt="Sin Imagen" height="30" width="40" class="rounded">
                                         </span>
                                     </td>
@@ -46,10 +46,10 @@
                                         @endcan
                                         @can('1.3 Eliminar Categoria')
                                             <a href="javascript:void(0)"
-                                                onclick="Confirm('{{ $category->id }}')"
-                                                class="btn btn-dark " title="Delete">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
+                                    onclick="Confirm('{{$category->id}}')"
+                                    class="btn btn-dark " title="Delete">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
                                         @endcan
                                     </td>
                                 </tr>
@@ -65,31 +65,34 @@
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        window.livewire.on('category-added', msg => {
+    document.addEventListener('DOMContentLoaded', function(){
+
+        window.livewire.on('category-added', msg =>{
             $('#theModal').modal('hide');
             noty(msg);
-        })
+        });
         window.livewire.on('category-updated', msg => {
             $('#theModal').modal('hide');
             noty(msg);
-        })
+        });
+        window.livewire.on('category-deleted', Msg => {
+            noty(Msg, 2);
+        });
         window.livewire.on('show-modal', msg => {
             $('#theModal').modal('show');
-        })
-        window.livewire.on('category-deleted', msg => {
-            noty(Msg, 2);
-        })
+        });
         window.livewire.on('hide-modal', msg => {
             $('#theModal').modal('hide');
-        })
+        });
         $('#theModal').on('hidden.bs.modal', function(e) {
             $('.er').css('display', 'none');
         });
+        window.livewire.on('category-withshopping', Msg =>{
+            noty(Msg, 2)
+        });
     });
-
     function Confirm(id) {
-        swal.fire({
+        swal({
             title: 'CONFIRMAR',
             text: 'CONFIRMAS ELIMINAR EL REGISTRO?',
             type: 'warning',
@@ -99,10 +102,11 @@
             confirmButtonColor: '#3b3f5c',
             confirmButtonText: 'Aceptar',
         }).then(function(result) {
-            if (result.value) {
-                window.livewire.emit('deleteRow', id)
+            if (result.value){
+               window.livewire.emit('deleteRow', id)
                 swal.close()
             }
         })
     }
 </script>
+

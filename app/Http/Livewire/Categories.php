@@ -66,14 +66,14 @@ class Categories extends Component
         $this->validate($rules, $messages);
 
         $category = Category::create([
-            'name' => $this->name
+            'name' => $this->name,
+            // 'image' => $this->image
         ]);
 
         $customFileName;
-        if($this->image)
-        {
+        if($this->image){
             $customFileName = uniqid() . '_.' . $this->image->extension();
-            $this->image->storeAs('public/categorias', $customFileName);
+            $this->image->storeAs('public/categories/', $customFileName);
             $category->image = $customFileName;
             $category->save();
         }
@@ -98,19 +98,19 @@ class Categories extends Component
         ]);
         if($this->image){
             $customFileName = uniqid() . '_.' . $this->image->extension();
-            $this->image->storeAs('public/categorias', $customFileName);
+            $this->image->storeAs('public/categories/', $customFileName);
             $imageName = $category->image;
             $category->image = $customFileName;
             $category->save();
 
             if($imageName !=null){
-                if(file_exists('storage/categorias' . $imageName)){
-                    unlink('storage/categorias' . $imageName);
+                if(file_exists('storage/categories' . $imageName)){
+                    unlink('storage/categories' . $imageName);
                 }
             }
         }
         $this->resetUI();
-        $this->emit('category-updated', 'Categoria Actualizada');
+        $this->emit('category-added', 'Categoria Actualizada');
     }
 
     //resetear los campos
@@ -127,23 +127,22 @@ class Categories extends Component
     ];
 
     public function Destroy(Category $category){
-        // $category = Category::find($id);
-
         if($category){
-        $product = Product::where('category_id' , $category->id)->count();
-        if($product > 0){
-        $this->emit('category-deleted', 'No Se Puede Eliminar Tiene Movimientos');
-        }else{
-            $imageName = $category->image;
-            $category->delete();
-            if($imageName !=null){
-                if(file_exists('storage/categorias/' . $imageTemp)){
-                unlink('storage/categorias/' .$imageName);
+            $shopping = Product::where('category_id' , $category->id)->count();
+            if($shopping > 0){
+                $this->emit('category-withshopping', 'No Se Puede Eliminar Tiene Movimientos');
+            }else{
+                $imageTemp = $category->image;
+                $category->delete();
+                if($imageTemp != null){
+                    if(file_exists('storage/categories/' . $imageTemp)){
+                        unlink('storage/categories/' . $imageTemp);
+                    }
                 }
+                $this->resetUI();
+                $this->emit('category-deleted', 'Producto Eliminado :/');
             }
-            $this->resetUI();
-            $this->emit('category-deleted', 'Categoria Eliminada');
-        }
         }
     }
 }
+

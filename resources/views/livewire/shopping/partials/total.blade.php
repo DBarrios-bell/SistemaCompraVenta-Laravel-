@@ -7,7 +7,9 @@
                     <select wire:model='provider_id' class="form-control">
                             <option value="0">Elegir</option>
                         @foreach ($providers as $provider)
-                            <option value="{{$provider->id}}">{{$provider->name}}</option>
+                            @if ($provider->status == 'Activo')
+                                <option value="{{$provider->id}}">{{$provider->name}}</option>
+                            @endif
                         @endforeach
                     </select>
                         @error('provider_id') <span class="text-danger er">{{$message}}</span>@enderror

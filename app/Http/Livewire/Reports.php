@@ -97,6 +97,7 @@ class Reports extends Component
         }
             $venta = Sale::where('id',$saleId)->first();
             $venta->status="Cancelado";
-        return $venta->save();
+            $this->emit('sale-revertir', 'Venta Revertida');
+            return $venta->save();
     }
 }

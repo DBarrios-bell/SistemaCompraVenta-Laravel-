@@ -62,7 +62,7 @@ class Providers extends Component
         $this->phone = $provider->phone;
         $this->email = $provider->email;
         $this->status = $provider->status;
-        $this->emit('show-modal', 'open!');
+        $this->emit('provider-show-modal', 'open!');
     }
 
     protected $listeners =[
@@ -109,7 +109,7 @@ class Providers extends Component
 
         $provider->save();
         $this->resetUI();
-        $this->emit('role-added', 'Se registro el rol con exito');
+        $this->emit('provider-added', 'Proveedor Guardado');
     }
 
     public function Update()
@@ -148,7 +148,7 @@ class Providers extends Component
         ]);
         $provider->save();
         $this->resetUI();
-        $this->emit('user-updated', 'Proveedor Actualizado');
+        $this->emit('provider-updated', 'Proveedor Actualizado');
     }
 
     public function destroy(Provider $provider)
@@ -156,11 +156,11 @@ class Providers extends Component
         if($provider){
             $shopping = Shopping::where('provider_id' , $provider->id)->count();
             if($shopping > 0){
-                $this->emit('provider-withsales', 'No es posible eliminar porque tiene compras asociadas');
+                $this->emit('provider-withsales', 'Proveedor Con Movimientos');
             }else{
                 $provider->delete();
                 $this->resetUI();
-                $this->emit('user-deleted', 'Usuario Eliminado :/');
+                $this->emit('provider-deleted', 'Proveedor Eliminado :/');
             }
         }
     }
