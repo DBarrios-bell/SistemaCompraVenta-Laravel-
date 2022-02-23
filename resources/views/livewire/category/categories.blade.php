@@ -18,11 +18,11 @@
             <div class="widget-content">
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped mt-1" id="myTable">
-                        <thead class="text-white" style="background: #3B3F5C">
+                        <thead class="text-white">
                             <tr>
                                 <th class="table-th text-white">DESCRIPCIÓN</th>
-                                <th class="table-th text-white">IMAGEN</th>
-                                <th class="table-th text-white">ACTIONS</th>
+                                <th class="table-th text-white text-center">IMAGEN</th>
+                                <th class="table-th text-white text-center">ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -46,7 +46,7 @@
                                         @endcan
                                         @can('1.3 Eliminar Categoria')
                                             <a href="javascript:void(0)"
-                                                onclick="Confirm('{{ $category->id }}','{{ $category->products->count() }}')"
+                                                onclick="Confirm('{{ $category->id }}')"
                                                 class="btn btn-dark " title="Delete">
                                                 <i class="fas fa-trash"></i>
                                             </a>
@@ -78,7 +78,7 @@
             $('#theModal').modal('show');
         })
         window.livewire.on('category-deleted', msg => {
-            noty(msg);
+            noty(Msg, 2);
         })
         window.livewire.on('hide-modal', msg => {
             $('#theModal').modal('hide');
@@ -88,11 +88,7 @@
         });
     });
 
-    function Confirm(id, products) {
-        if (products > 0) {
-            swal('NO SE PUEDE ELIMINAR LA CATEGORIA PORQUE TIENE PRODUCTOS RELACIONADOS')
-            return;
-        }
+    function Confirm(id) {
         swal.fire({
             title: 'CONFIRMAR',
             text: 'CONFIRMAS ELIMINAR EL REGISTRO?',

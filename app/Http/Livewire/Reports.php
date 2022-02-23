@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Product;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Sale;
@@ -88,9 +89,14 @@ class Reports extends Component
 
         public function cancelSale($saleId)
     {
-        $affected = DB::table('sales')
-              ->where('id', $saleId)
-              ->update(['status' => 'Cancelado']);
-        return $affected;
+        $detalles = SaleDetails::where('sale_id',$saleId)->get();
+        foreach($detalles as $detalle){
+            $producto = Product::where('id',$detalle->product_id)->first();
+            $producto->stock+=$detalle->quantity;
+            $producto->save();
+        }
+            $venta = Sale::where('id',$saleId)->first();
+            $venta->status="Cancelado";
+        return $venta->save();
     }
 }

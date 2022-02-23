@@ -1,7 +1,7 @@
 @extends('layouts.theme.login')
 @section('content')
     <div class="form-container" style="text-align: center">
-        <div class="form-form" style="background-color: #3b3f5c; border-top-right-radius: 25%">
+        <div class="form-form" style=" border-top-right-radius: 25%">
             <div class="form-form-wrap" style="padding: 2%">
                 <div class="form-content ">
                     <br>

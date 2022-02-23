@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Support\Facades\Storage; //uso de img
 use Livewire\WithFileUploads;  //trait para cargue de img livewire
 use Livewire\WithPagination;
@@ -125,16 +126,24 @@ class Categories extends Component
         'deleteRow' => 'Destroy'
     ];
 
-    public function Destroy($id){
-        $category = Category::find($id);
-        $imageName = $category->image;
-        $category->delete();
+    public function Destroy(Category $category){
+        // $category = Category::find($id);
 
-        if($imageName !=null){
-            unlink('storage/categorias/' .$imageName);
+        if($category){
+        $product = Product::where('category_id' , $category->id)->count();
+        if($product > 0){
+        $this->emit('category-deleted', 'No Se Puede Eliminar Tiene Movimientos');
+        }else{
+            $imageName = $category->image;
+            $category->delete();
+            if($imageName !=null){
+                if(file_exists('storage/categorias/' . $imageTemp)){
+                unlink('storage/categorias/' .$imageName);
+                }
+            }
+            $this->resetUI();
+            $this->emit('category-deleted', 'Categoria Eliminada');
         }
-
-        $this->resetUI();
-        $this->emit('category-deleted', 'Categoria Eliminada');
+        }
     }
 }

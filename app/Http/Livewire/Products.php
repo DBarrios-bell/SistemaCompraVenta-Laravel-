@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ShoppingDetails;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -26,7 +27,6 @@ class Products extends Component
         $this->pageTitle = 'Listado';
         $this->componentName = 'Productos';
         $this->categoryid = 'Elegir';
-        $this->stock = 0;
     }
 
     public function cleanValue($value)
@@ -88,7 +88,7 @@ class Products extends Component
             'cost' => $this->cleanValue($this->cost),
             'price' => $this->cleanValue($this->price),
             'barcode' => $this->barcode,
-            'stock' => $this->stock,
+            'stock' => 0,
             'alerts' => $this->alerts,
             'category_id' => $this->categoryid
         ]);
@@ -172,7 +172,7 @@ class Products extends Component
     public function resetUI(){
         $this->name ='';
         $this->barcode ='';
-        $this->cots ='';
+        $this->cost ='';
         $this->price ='';
         $this->stock ='';
         $this->alerts ='';
@@ -185,15 +185,22 @@ class Products extends Component
     protected $listeners =['deleteRow' => 'Destroy'];
 
     public function Destroy(Product $product){
-        $imageTemp = $product->image;
-        $product->delete();
 
-        if($imageTemp != null){
-            if(file_exists('storage/products/' . $imageTemp)){
-                unlink('storage/products/' . $imageTemp);
+        if($product){
+            $shopping = ShoppingDetails::where('product_id' , $product->id)->count();
+            if($shopping > 0){
+                $this->emit('product-withshopping', 'No Se Puede Eliminar Tiene Movimientos');
+            }else{
+                $imageTemp = $product->image;
+                $product->delete();
+                    if($imageTemp != null){
+                        if(file_exists('storage/products/' . $imageTemp)){
+                        unlink('storage/products/' . $imageTemp);
+                        }
+                    }
+                $this->resetUI();
+                $this->emit('product-deleted', 'Producto Eliminado :/');
             }
         }
-        $this->resetUI();
-        $this->emit('product-deleted', 'Producto Eliminado');
     }
 }

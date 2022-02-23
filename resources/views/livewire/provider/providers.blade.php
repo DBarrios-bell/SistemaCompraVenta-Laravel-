@@ -101,6 +101,9 @@
         $('#theModal').on('hidden.bs.modal', function(e) {
             $('.er').css('display', 'none');
         })
+        window.livewire.on('provider-withsales', Msg =>{
+            noty(Msg)
+        })
     });
 
     function Confirm(id) {

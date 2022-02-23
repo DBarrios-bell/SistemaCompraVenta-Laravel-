@@ -175,9 +175,7 @@
                                         style="width:70px;height:70px">
                                     </lord-icon>
                                 </div>
-                                <span>
-                                    <h6>REPORTES</h6>
-                                </span>
+                                <span>REPORTES</span>
                             </div>
                         </a>
                     </li>

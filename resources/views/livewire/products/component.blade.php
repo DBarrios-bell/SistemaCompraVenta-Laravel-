@@ -50,8 +50,8 @@
                                         <img src="{{ asset('storage/products/' . $product->imagen) }}"
                                         alt="Sin Imagen" height="30" width="40" class="rounded">
                                         {{-- <img src="{{ asset('storage/categorias/' .$category->imagen) }}"
-                                         alt="Sin imagen" height="40" width="50" class="rounded">
-                                    </span> --}}
+                                         alt="Sin imagen" height="40" width="50" class="rounded">--}}
+                                    </span>
                                 </td>
                                 <td class="text-center">
                                     @can('2.2 Editar Producto')
@@ -92,8 +92,8 @@
             $('#theModal').modal('hide');
             noty(msg);
         });
-        window.livewire.on('product-deleted', msg => {
-            noty(msg);
+        window.livewire.on('product-deleted', Msg => {
+            noty(Msg, 2);
         });
         window.livewire.on('show-modal', msg => {
             $('#theModal').modal('show');
@@ -103,6 +103,9 @@
         });
         $('#theModal').on('hidden.bs.modal', function(e) {
             $('.er').css('display', 'none');
+        });
+        window.livewire.on('product-withshopping', Msg =>{
+            noty(Msg, 2)
         });
     });
     function Confirm(id) {

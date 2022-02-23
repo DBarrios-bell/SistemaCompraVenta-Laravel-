@@ -3,8 +3,9 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\Provider;
 use Livewire\WithPagination;
+use App\Models\Provider;
+use App\Models\Shopping;
 
 class Providers extends Component
 {
@@ -53,6 +54,22 @@ class Providers extends Component
         $this->resetPage();
     }
 
+    public function Edit(Provider $provider)
+    {
+        $this->selected_id = $provider->id;
+        $this->name = $provider->name;
+        $this->nit = $provider->nit;
+        $this->phone = $provider->phone;
+        $this->email = $provider->email;
+        $this->status = $provider->status;
+        $this->emit('show-modal', 'open!');
+    }
+
+    protected $listeners =[
+        'deleteRow' => 'destroy',
+        'resetUI' => 'resetUI'
+    ];
+
     public function Store()
     {
         $rules = [
@@ -64,8 +81,8 @@ class Providers extends Component
         ];
         $messages = [
             'name.required' => 'El nombre del proveedor es requerido',
-            'name.unique' => 'El rol ya existe',
-            'name.min' => 'El nombre Rol min. 5 caracteres',
+            'name.unique' => 'El Proveedor ya existe',
+            'name.min' => 'El nombre Proveedor min. 5 caracteres',
             'nit.required' => 'El nit es Requerido',
             'nit.min' => 'El Nit min. 7 caracteres',
             'nit.unique' => 'El Nit ya existe',
@@ -91,8 +108,60 @@ class Providers extends Component
         ]);
 
         $provider->save();
-        $this->emit('role-added', 'Se registro el rol con exito');
         $this->resetUI();
+        $this->emit('role-added', 'Se registro el rol con exito');
     }
 
+    public function Update()
+    {
+        $rules = [
+            'name' => 'required|min:5',
+            'nit' => 'required|min:7',
+            'phone' => 'required|min:10|max:10',
+            'email' => 'required|min:10',
+            'status' => 'required|not_in:Elegir'
+        ];
+        $messages = [
+            'name.required' => 'El nombre del proveedor es requerido',
+            'name.min' => 'El nombre Rol min. 5 caracteres',
+            'nit.required' => 'El nit es Requerido',
+            'nit.min' => 'El Nit min. 7 caracteres',
+            'phone.required' => 'El telefono es requerido',
+            'phone.min' => 'Minimo 10 Caracteres',
+            'phone.max' => 'Maximo 10 Caracteres',
+            'email.required' => 'La direccion de Correo Electronico es requerido',
+            'email.min' => 'Minimo 10 caracteres',
+            'email.unique' => 'El correo esta relacionado a otro proveedor',
+            'status.required' => 'Seleccione el estado',
+            'status.not_in' => 'Seleccione el estado',
+        ];
+
+        $this->validate($rules, $messages);
+
+        $provider = Provider::find($this->selected_id);
+        $provider->update([
+            'name' => $this->name,
+            'nit' => $this->nit,
+            'phone' => $this->phone,
+            'email' => $this->email,
+            'status' => $this->status,
+        ]);
+        $provider->save();
+        $this->resetUI();
+        $this->emit('user-updated', 'Proveedor Actualizado');
+    }
+
+    public function destroy(Provider $provider)
+    {
+        if($provider){
+            $shopping = Shopping::where('provider_id' , $provider->id)->count();
+            if($shopping > 0){
+                $this->emit('provider-withsales', 'No es posible eliminar porque tiene compras asociadas');
+            }else{
+                $provider->delete();
+                $this->resetUI();
+                $this->emit('user-deleted', 'Usuario Eliminado :/');
+            }
+        }
+    }
 }
