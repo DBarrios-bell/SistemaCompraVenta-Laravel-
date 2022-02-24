@@ -35,7 +35,7 @@ class Reports extends Component
         ->section('content');
     }
 
-        protected $listeners = [
+    protected $listeners = [
         'cancelSale' => 'cancelSale'
     ];
 
@@ -97,6 +97,7 @@ class Reports extends Component
         }
             $venta = Sale::where('id',$saleId)->first();
             $venta->status="Cancelado";
+            Logs::logs('Revertir',"Id: $venta->id",'Ventas');
             $this->emit('sale-revertir', 'Venta Revertida');
             return $venta->save();
     }

@@ -71,8 +71,8 @@ class Asignar extends Component
         }
         $role = Role::find($this->role);
         $role->syncPermissions([0]);
-
-        $this->emit('removeall', "Se revocaron todos los permisos al rol $role->name");
+        Logs::logs('Eliminar Todo',"Id: $role->id - nombre: $role->name", $this->componentName);
+        $this->emit('removeall', "Todos Los Permisos Revocados A $role->name");
 
     }
 
@@ -87,8 +87,8 @@ class Asignar extends Component
         $role = Role::find($this->role);
         $permisos = Permission::pluck('id')->toArray();
         $role->syncPermissions($permisos);
-
-        $this->emit('syncall', "Se sincronizaron todos los permisos al rol $role->name");
+        Logs::logs('Agregar Todo',"Id: {$role->id} - nombre: {$role->name}", $this->componentName);
+        $this->emit('syncall', "Todos los Permisos Agregados A $role->name");
 
     }
 
@@ -98,10 +98,12 @@ class Asignar extends Component
              $roleName = Role::find($this->role);
              if ($state) {
                 $roleName->givePermissionTo($permisoName);
-                $this->emit('permi', "Permiso asignado correctamente");
+                Logs::logs('Agregar',"Id: {$roleName->id} - nombre: {$roleName->name}", $this->componentName);
+                $this->emit('permi', "Permiso asignado");
              }else{
                  $roleName->revokePermissionTo($permisoName);
-                $this->emit('permi', "Permiso eliminado correctamente");
+                Logs::logs('Eliminar',"Id: {$roleName->id} - nombre: {$roleName->name}", $this->componentName);
+                $this->emit('permi', "Permiso eliminado");
              }
          }else{
             $this->emit('permi', "Elige un rol valido");

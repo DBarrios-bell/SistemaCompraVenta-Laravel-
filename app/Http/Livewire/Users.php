@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Log;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use Livewire\withFileUploads;
@@ -11,8 +12,8 @@ use App\Models\User;
 
 class Users extends Component
 {
-    use WithPagination;
     use WithFileUploads;
+    use WithPagination;
 
     public $name, $phone, $email, $status, $image, $password, $selected_id, $fileLoaded, $profile, $pageTitle, $componentName, $search;
     private $pagination = 5;
@@ -112,12 +113,14 @@ class Users extends Component
         // asigna el rol al usuario
         $user->syncRoles($this->profile);
 
+        $customFileName;
         if($this->image){
             $customFileName = uniqid() . '_.' . $this->image->extension();
             $this->image->storeAs('public/users', $customFileName);
             $user->image = $customFileName;
             $user->save();
         }
+        Logs::logs('Crear',"Id: {$user->id} - nombre: {$user->name}", $this->componentName);
         $this->resetUI();
         $this->emit('user-added', 'Usuario Registrado');
     }
@@ -172,6 +175,7 @@ class Users extends Component
                 }
             }
         }
+        Logs::logs('Editar',"Id: {$user->id} - nombre: {$user->name}", $this->componentName);
         $this->resetUI();
         $this->emit('user-updated', 'Usuario Actualizado');
     }
@@ -181,9 +185,10 @@ class Users extends Component
         if($user){
             $sales = Sale::where('user_id' , $user->id)->count();
             if($sales > 0){
-                $this->emit('user-withsales', 'No es posible eliminar porque tiene ventas registradas');
+                $this->emit('user-withsales', 'Usuario Con Ventas Registradas');
             }else{
                 $user->delete();
+                Logs::logs('Eliminar',"Id: {$user->id} - nombre: {$user->name}", $this->componentName);
                 $this->resetUI();
                 $this->emit('user-deleted', 'Usuario Eliminado :/');
             }

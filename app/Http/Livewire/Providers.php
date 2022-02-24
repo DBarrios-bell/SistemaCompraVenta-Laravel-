@@ -108,6 +108,7 @@ class Providers extends Component
         ]);
 
         $provider->save();
+        Logs::logs('Crear',"Id: {$provider->id} - nombre: {$provider->name}", $this->componentName);
         $this->resetUI();
         $this->emit('provider-added', 'Proveedor Guardado');
     }
@@ -147,6 +148,7 @@ class Providers extends Component
             'status' => $this->status,
         ]);
         $provider->save();
+        Logs::logs('Editar',"Id: {$provider->id} - nombre: {$provider->name}", $this->componentName);
         $this->resetUI();
         $this->emit('provider-updated', 'Proveedor Actualizado');
     }
@@ -159,6 +161,7 @@ class Providers extends Component
                 $this->emit('provider-withsales', 'Proveedor Con Movimientos');
             }else{
                 $provider->delete();
+                Logs::logs('Eliminar',"Id: {$provider->id} - nombre: {$provider->name}", $this->componentName);
                 $this->resetUI();
                 $this->emit('provider-deleted', 'Proveedor Eliminado :/');
             }

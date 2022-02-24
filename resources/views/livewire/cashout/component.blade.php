@@ -62,7 +62,7 @@
                 <div class="col-sm-12 col-md-8">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped mt-1">
-                            <thead class="text-white" style="background: #3B3F5C">
+                            <thead class="text-white">
                                 <tr>
                                     <th class="table-th text-center text-white">FOLIO</th>
                                     <th class="table-th text-center text-white">TOTAL</th>

@@ -10,6 +10,9 @@
         noty(Msg, 2)
         })
         window.livewire.on('sale-error' ,Msg =>{
+        noty(Msg, 2)
+        })
+        window.livewire.on('sale-ok' ,Msg =>{
         noty(Msg)
         })
         // NO TE COMAS LAS COMAS JAJA

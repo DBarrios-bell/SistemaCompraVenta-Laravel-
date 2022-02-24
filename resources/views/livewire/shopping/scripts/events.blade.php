@@ -12,6 +12,9 @@
         window.livewire.on('sale-error' ,Msg =>{
         noty(Msg)
         })
+        window.livewire.on('buy-ok' ,Msg =>{
+        noty(Msg)
+        })
         // NO TE COMAS LAS COMAS JAJA
         window.livewire.on('print-ticket', saleId =>{
             window.open("print://" + saleId , '_blank')

@@ -100,6 +100,7 @@ class Products extends Component
             $product->image = $customFileName;
             $product->save();
         }
+        Logs::logs('Crear',"Id: {$product->id} - nombre: {$product->name}", $this->componentName);
         $this->resetUI();
         $this->emit('product-added', 'Producto Registrado');
     }
@@ -121,7 +122,7 @@ class Products extends Component
 
     public function Update(){
         $rules = [
-            'name' => "required|min:3,{$this->selected_id}",
+            'name' => "required|min:3|unique:products,name,{$this->selected_id}",
             'cost' => 'required',
             'price' => 'required',
             // 'stock' => 'required',
@@ -130,7 +131,8 @@ class Products extends Component
         ];
         $messages =[
             'name.required' => 'Nombre del producto requerido',
-            'mane.min' => 'El nombre debe tener minino 3 caracteres',
+            'name.min' => 'El nombre debe tener minino 3 caracteres',
+            'name.unique' => 'El nombre ya existe',
             'cost.required' => 'El costo es requerido',
             'price.required' => 'El precio es requerido',
             // 'stock.required' => 'El stock es requerido',
@@ -164,6 +166,7 @@ class Products extends Component
                 }
             }
         }
+        Logs::logs('Editar',"Id: {$product->id} - nombre: {$product->name}", $this->componentName);
         $this->resetUI();
         $this->emit('product-updated', 'Producto Actualizado');
     }
@@ -198,6 +201,7 @@ class Products extends Component
                         unlink('storage/products/' . $imageTemp);
                         }
                     }
+                Logs::logs('Eliminar',"Id: {$product->id} - nombre: {$product->name}", $this->componentName);
                 $this->resetUI();
                 $this->emit('product-deleted', 'Producto Eliminado :/');
             }

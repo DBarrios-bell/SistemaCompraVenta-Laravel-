@@ -77,6 +77,7 @@ class Categories extends Component
             $category->image = $customFileName;
             $category->save();
         }
+        Logs::logs('Crear',"Id: {$category->id} - nombre: {$category->name}",$this->componentName);
         $this->resetUI();
         $this->emit('category-added', 'Categoria Registrada');
     }
@@ -109,6 +110,7 @@ class Categories extends Component
                 }
             }
         }
+        Logs::logs('Editar',"Id: {$category->id} - nombre: {$category->name}",$this->componentName);
         $this->resetUI();
         $this->emit('category-added', 'Categoria Actualizada');
     }
@@ -139,6 +141,7 @@ class Categories extends Component
                         unlink('storage/categories/' . $imageTemp);
                     }
                 }
+                Logs::logs('Eliminar',"Id: {$category->id} - nombre: {$category->name}", $this->componentName);
                 $this->resetUI();
                 $this->emit('category-deleted', 'Producto Eliminado :/');
             }

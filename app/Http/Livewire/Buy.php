@@ -224,7 +224,8 @@ class Buy extends Component
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
             $this->provider_id = 'Elegir';
-            $this->emit('sale-ok','Compra Resgistrada con Exito');
+            $this->emit('buy-ok','Se Registro su Compra');
+            Logs::logs('Crear',"Id: {$shopping->id}",'Compra');
             // $this->emit('print-ticket',$sale->id);
 
 

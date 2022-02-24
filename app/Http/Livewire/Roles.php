@@ -52,9 +52,10 @@ class Roles extends Component
 
         $this->validate($rules, $messages);
 
-        Role::create(['name' => $this->roleName]);
-
-        $this->emit('role-added', 'Se registro el rol con exito');
+        $role = Role::create(['name' => $this->roleName]);
+        $role->save();
+        Logs::logs('Crear',"Id: {$role->id} - nombre: {$role->name}", $this->componentName);
+        $this->emit('role-added', 'Rol Registrado');
         $this->resetUI();
     }
 
@@ -82,8 +83,8 @@ class Roles extends Component
         $role = Role::find($this->selected_id);
         $role->name = $this->roleName;
         $role->save();
-
-        $this->emit('role-updated', 'Se actualizo el rol con exito');
+        Logs::logs('Editar',"Id: {$role->id} - nombre: {$role->name}", $this->componentName);
+        $this->emit('role-updated', 'Rol Actualizado');
         $this->resetUI();
     }
 
@@ -95,11 +96,13 @@ class Roles extends Component
         $permissionsCount = Role::find($id)->permissions->count();
         if($permissionsCount > 0)
         {
-            $this->emit('role-error', 'No se puede eliminar el rol por que tiene permisos asociados');
+            $this->emit('role-error', 'Tiene Permisos Asocidado');
             return;
         }
-        Role::find($id)->delete();
-        $this->emit('role-deleted', 'Se elimino el rol con exito');
+        $role = Role::find($id);
+        $role->delete();
+        Logs::logs('Eliminar',"Id: {$role->id} - nombre: {$role->name}", $this->componentName);
+        $this->emit('role-deleted', 'Rol Eliminado');
     }
 
     public function resetUI()

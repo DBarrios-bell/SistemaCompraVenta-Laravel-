@@ -81,6 +81,7 @@ class Coins extends Component
             $denomination->image = $customFileName;
             $denomination->save();
         }
+        Logs::logs('Crear',"Id: {$denomination->id} - nombre: {$denomination->name}", $this->componentName);
         $this->resetUI();
         $this->emit('item-added', 'Denominacion Registrada');
     }
@@ -116,6 +117,7 @@ class Coins extends Component
                 }
             }
         }
+        Logs::logs('Editar',"Id: {$denomination->id} - nombre: {$denomination->name}", $this->componentName);
         $this->resetUI();
         $this->emit('item-updated', 'Denominacion Actualizada');
     }
@@ -140,7 +142,7 @@ class Coins extends Component
         if($imageName !=null){
             unlink('storage/denominations/' .$imageName);
         }
-
+        Logs::logs('Eliminar',"Id: {$denomination->id} - nombre: {$denomination->name}", $this->componentName);
         $this->resetUI();
         $this->emit('item-deleted', 'Denominacion Eliminada');
     }

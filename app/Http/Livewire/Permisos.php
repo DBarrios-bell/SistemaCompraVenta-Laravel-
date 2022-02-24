@@ -52,8 +52,9 @@ class Permisos extends Component
 
         $this->validate($rules, $messages);
 
-        Permission::create(['name' => $this->permissionName]);
-
+        $permission = Permission::create(['name' => $this->permissionName]);
+        $permission->save();
+        Logs::logs('Crear',"Id: {$permission->id} - nombre: {$permission->name}", $this->componentName);
         $this->emit('permiso-added', 'Se registro el permiso con exito');
         $this->resetUI();
     }
@@ -78,10 +79,10 @@ class Permisos extends Component
 
         $this->validate($rules, $messages);
 
-        $permiso = Permission::find($this->selected_id);
-        $permiso->name = $this->permissionName;
-        $permiso->save();
-
+        $permission = Permission::find($this->selected_id);
+        $permission->name = $this->permissionName;
+        $permission->save();
+        Logs::logs('Editar',"Id: {$permission->id} - nombre: {$permission->name}", $this->componentName);
         $this->emit('permiso-updated', 'Se actualizo el rol con exito');
         $this->resetUI();
     }
@@ -97,7 +98,9 @@ class Permisos extends Component
             $this->emit('permiso-error', 'No se puede eliminar el permiso por que tiene permisos asociados');
             return;
         }
-        Permission::find($id)->delete();
+        $permission = Permission::find($id);
+        $permission->delete();
+        Logs::logs('Eliminar',"Id: {$permission->id} - nombre: {$permission->name}", $this->componentName);
         $this->emit('permiso-deleted', 'Se elimino el permiso con exito');
     }
 

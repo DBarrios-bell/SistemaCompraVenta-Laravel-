@@ -29,6 +29,13 @@ class User extends Authenticatable
         'image'
     ];
 
+    public function getImagenAttribute(){
+        if($this->image != null)
+            return (file_exists('storage/users/' . $this->image) ? $this->image : 'blank.jpeg');
+        else
+            return 'blank.jpeg';
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

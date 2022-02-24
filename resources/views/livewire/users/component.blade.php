@@ -49,9 +49,7 @@
                                     <span class="badge {{ $r->status == 'ACTIVE' ? 'badge-success' : 'badge-danger'}} text-uppercase">{{$r->status}}</span>
                                 </td>
                                 <td class="text-center">
-                                    @if($r->image !=null)
-                                    <img src=" {{asset('storage/users/' . $r->image)}} " alt="Sin Imagen" height="30" width="40" class="rounded" class="card-img-top img-fluid">
-                                    @endif
+                                    <img src=" {{asset('storage/users/' . $r->image)}} " alt="Sin Imagen" height="30" width="40" class="rounded"> {{--class="card-img-top img-fluid"--}}
                                 </td>
                                 <td class="text-center">
                                     @can('7.2 Actualizar Usuario')

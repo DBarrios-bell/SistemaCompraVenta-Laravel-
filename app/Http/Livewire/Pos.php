@@ -239,7 +239,8 @@ class Pos extends Component
             $this->change =0;
             $this->total = Cart::getTotal();
             $this->itemsQuantity = Cart::getTotalQuantity();
-            $this->emit('sale-ok','Venta Resgistrada con Exito');
+            Logs::logs('Crear',"Id: $sale->id", 'Ventas');
+            $this->emit('sale-ok','Venta Resgistrada');
             $this->emit('print-ticket',$sale->id);
 
 
