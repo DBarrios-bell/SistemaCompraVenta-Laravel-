@@ -12,6 +12,7 @@ use App\Http\Livewire\Providers;
 use App\http\Livewire\Reports;
 use App\http\Livewire\Roles;
 use App\Http\Livewire\Buy;
+use App\Http\Livewire\ReportsBuy;
 use App\http\Livewire\Users;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('providers', Providers::class)->name('providers');
     Route::get('cashout', Cashout::class)->name('cashout');
     Route::get('reports', reports::class)->name('reports');
+    Route::get('reporteCompras', ReportsBuy::class)->name('reporteCompras');
 
     // Reportes PDF
     Route::get('report/pdf/{user}/{type}/{f1}/{f2}', [ExportController::class, 'reportPDF']);

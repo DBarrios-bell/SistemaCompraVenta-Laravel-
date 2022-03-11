@@ -23,8 +23,8 @@
                                 <h6>Elige Tipo de Reporte</h6>
                                 <div class="form-group">
                                     <select wire:model="reportType" class="form-control">
-                                        <option value="0">Ventas del Dia</option>
-                                        <option value="1">Ventas por Fecha</option>
+                                        <option value="0">Compras del Dia</option>
+                                        <option value="1">Compras por Fecha</option>
                                     </select>
                                 </div>
                             </div>
@@ -43,17 +43,17 @@
                                 </div>
                             </div>
                             <div class="col-sm-12">
-                                <button wire:click="$refresh" class="btn btn-dark btn-block">Consultar</button>
-                                @can('10.1 Reporte Excel')
-                                    <a class="btn btn-dark btn-block {{ count($data) < 1 ? 'disabled' : '' }}"
+                                <button wire:click.prevent="BuyByDate" class="btn btn-dark btn-block">Consultar</button>
+                                {{-- @can('10.1 Reporte Excel') --}}
+                                    <a class="btn btn-dark btn-block {{ count($info) < 1 ? 'disabled' : '' }}"
                                         href="{{ url('report/pdf' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
                                         target="_blank">Generar PDF</a>
-                                @endcan
-                                @can('10.2 Reporte Pdf')
-                                    <a class="btn btn-dark btn-block {{ count($data) < 1 ? 'disabled' : '' }}"
+                                {{-- @endcan --}}
+                                {{-- @can('10.2 Reporte Pdf') --}}
+                                    <a class="btn btn-dark btn-block {{ count($info) < 1 ? 'disabled' : '' }}"
                                         href="{{ url('report/excel' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
                                         target="_blank">Exportar a Excel</a>
-                                @endcan
+                                {{-- @endcan --}}
                             </div>
                         </div>
                     </div>
@@ -74,57 +74,48 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (count($data) < 1)
+                                    @if (count($info) < 1)
                                         <tr>
                                             <td colspan="7" class="text-center">
                                                 <h5>Sin Resultado</h5>
                                             </td>
                                         </tr>
                                     @endif
-                                    @foreach ($data as $d)
+                                    @foreach ($info as $inf)
                                         <tr>
                                             <td class="text-center">
-                                                <h6>{{ $d->id }}</h6>
+                                                <h6>{{ $inf->id }}</h6>
                                             </td>
                                             <td class="text-end">
-                                                <h6>${{ number_format($d->total, 2) }}</h6>
+                                                <h6>${{ number_format($inf->total, 2) }}</h6>
                                             </td>
                                             <td class="text-center">
-                                                <h6>{{ $d->items }}</h6>
+                                                <h6>{{ $inf->items }}</h6>
                                             </td>
                                             <td class="text-center">
-                                                <h6>{{ $d->status }}</h6>
+                                                <h6>{{ $inf->status }}</h6>
                                             </td>
                                             <td class="text-center">
-                                                <h6>{{ $d->user }}</h6>
+                                                <h6>{{ $inf->user }}</h6>
                                             </td>
                                             <td class="text-center">
-                                                <h6>{{ \Carbon\Carbon::parse($d->created_at)->format('d-m-Y') }}</h6>
+                                                <h6>{{ \Carbon\Carbon::parse($inf->created_at)->format('d-m-Y') }}</h6>
                                             </td>
                                             <td class="text-center" width="50px">
                                                 <h6>
-                                                    <button wire:click.prevent="getDetails({{ $d->id }})"
+                                                    <button wire:click.prevent="getDetails({{ $inf->id }})"
                                                         class="btn btn-dark btn-sm" title="Detalle de Venta">
                                                         <i class="fas fa-list"></i>
                                                     </button>
-                                                    @if ($d->status == 'Pago')
+                                                    @if ($inf->status == 'Pago')
                                                     <a href="javascript:void(0)"
-                                                        onclick="cancelSale({{ $d->id }})" class="btn btn-dark btn-sm"
+                                                        onclick="cancelBuy({{ $inf->id }})" class="btn btn-dark btn-sm"
                                                         title="Revertir">
                                                         <i class="fas fa-undo"></i>
                                                     </a>
                                                     @endif
                                                 </h6>
                                             </td>
-                                            {{-- <td class="text-center" width="50px">
-                                                <h6>
-                                                    <button wire:click.prevent="cancelSale({{ $d->id }})"
-                                                        class="btn btn-dark btn-sm">
-                                                        <i class="fas fa-undo"> Revertir</i>
-                                                    </button>
-
-                                                </h6>
-                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -135,7 +126,7 @@
             </div>
         </div>
     </div>
-    @include('livewire.reports.sales-detail')
+    @include('livewire.reporteShopping.buy-detail')
 </div>
 
 <script>
@@ -194,15 +185,15 @@
         window.livewire.on('show-modal', Msg => {
             $('#modalDetails').modal('show')
         })
-        window.livewire.on('sale-revertir', Msg => {
+        window.livewire.on('buy-revertir', Msg => {
             noty(Msg)
         })
     })
 
-    function cancelSale(id) {
+    function cancelBuy(id) {
         swal.fire({
             title: 'CONFIRMA',
-            text: 'REVERTIR LA VENTA?',
+            text: 'REVERTIR LA COMPRA?',
             type: 'warning',
             showCancelButton: true,
             cancelButtonText: 'Cerrar',
@@ -211,9 +202,10 @@
             confirmButtonText: 'Aceptar',
         }).then(function(result) {
             if (result.value) {
-                window.livewire.emit('cancelSale', id)
+                window.livewire.emit('cancelBuy', id)
                 swal.close()
             }
         })
     }
 </script>
+

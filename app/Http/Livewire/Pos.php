@@ -33,10 +33,14 @@ class Pos extends Component
         ->section('content');
     }
 
-    // calculo del cambio
+    // calculo del cambio y el efectivo 
     public function ACash($value)
     {
         $this->efectivo += ($value == 0 ? $this->total : $value);
+        $this->change = ($this->efectivo - $this->total);
+    }
+    //calcula el cambio presionando tab desde la caja de efectivo
+    public function AChange(){
         $this->change = ($this->efectivo - $this->total);
     }
 

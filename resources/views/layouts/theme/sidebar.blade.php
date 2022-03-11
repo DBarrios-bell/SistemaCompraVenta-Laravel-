@@ -47,7 +47,7 @@
                 @endcan
                 {{-- @can('11. Compras') --}}
                 <li class="">
-                    <a href="{{route('buy')}}" class="menu-toggle" data-active='false'>
+                    <a href="{{ route('buy') }}" class="menu-toggle" data-active='false'>
                         <div class="base-menu">
                             <div class="base-icons">
                                 <lord-icon src="https://assets7.lottiefiles.com/packages/lf20_tbn1qghe.json"
@@ -120,20 +120,20 @@
                         </a>
                     </li>
                 @endcan
-                {{-- @can('7. Proveedor')  --}}
-                    <li class="">
-                        <a href="{{ route('providers') }}" class="menu-toggle" data-active='false'>
-                            <div class="base-menu">
-                                <div class="base-icons">
-                                    <lord-icon src="https://assets1.lottiefiles.com/packages/lf20_umcyeafh.json"
-                                        trigger="loop-on-hover" colors="primary:#07a889,secondary:#ffffff"
-                                        style="width:70px;height:70px">
-                                    </lord-icon>
-                                </div>
-                                <span>PROVEEDOR</span>
+                {{-- @can('7. Proveedor') --}}
+                <li class="">
+                    <a href="{{ route('providers') }}" class="menu-toggle" data-active='false'>
+                        <div class="base-menu">
+                            <div class="base-icons">
+                                <lord-icon src="https://assets1.lottiefiles.com/packages/lf20_umcyeafh.json"
+                                    trigger="loop-on-hover" colors="primary:#07a889,secondary:#ffffff"
+                                    style="width:70px;height:70px">
+                                </lord-icon>
                             </div>
-                        </a>
-                    </li>
+                            <span>PROVEEDOR</span>
+                        </div>
+                    </a>
+                </li>
                 {{-- @endcan --}}
                 @can('8. Tab Moneda')
                     <li class="">
@@ -167,7 +167,7 @@
                 @endcan
                 @can('10. Reporte')
                     <li class="">
-                        <a href="{{route('reports')}}" class="menu-toggle" data-active='false'>
+                        <a href="{{ route('reports') }}" class="menu-toggle" data-active='false'>
                             <div class="base-menu">
                                 <div class="base-icons">
                                     <lord-icon src="https://assets5.lottiefiles.com/packages/lf20_g4rf74et.json"
