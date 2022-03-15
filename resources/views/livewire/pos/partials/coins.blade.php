@@ -27,7 +27,7 @@
                             </div>
                             <input type="number" id="cash"
                             wire:model="efectivo"
-                            wire:keydown.enter.prevent="AChange({{ $change }})"
+                            wire:keydown.enter.prevent="AChange({{ $change }})" wire:keydown.tab="AChange({{ $change }})"
                             {{-- wire:keydown.enter="saveSale" --}}
                                 class="form-control text-center" value="{{ $efectivo }}">
                             <div class="input-group-append">
