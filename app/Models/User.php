@@ -29,6 +29,10 @@ class User extends Authenticatable
         'image'
     ];
 
+    public function logs(){
+    return $this->hasMany(Logs::class);
+    }
+
     public function getImagenAttribute(){
         if($this->image != null)
             return (file_exists('storage/users/' . $this->image) ? $this->image : 'blank.jpeg');

@@ -105,7 +105,7 @@ class ReportsBuy extends Component
         }
         $buy = Shopping::where('id',$buyId)->first();
         $buy->status="Cancelado";
-        Logs::logs('Revertir',"Id: $buy->id",'Compras');
+        Logs::logs('Revertir',"Id: $buy->id",'Compra');
         $this->emit('buy-revertir', 'Compra Revertida');
         $buy->save();
         DB::commit();
