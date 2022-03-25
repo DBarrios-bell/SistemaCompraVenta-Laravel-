@@ -46,12 +46,12 @@
                                 <button wire:click.prevent="BuyByDate" class="btn btn-dark btn-block">Consultar</button>
                                 {{-- @can('10.1 Reporte Excel') --}}
                                     <a class="btn btn-dark btn-block {{ count($info) < 1 ? 'disabled' : '' }}"
-                                        href="{{ url('report/pdf' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
+                                        href="{{ url('report/pdfCompras' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
                                         target="_blank">Generar PDF</a>
                                 {{-- @endcan --}}
                                 {{-- @can('10.2 Reporte Pdf') --}}
                                     <a class="btn btn-dark btn-block {{ count($info) < 1 ? 'disabled' : '' }}"
-                                        href="{{ url('report/excel' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
+                                        href="{{ url('report/excelCompras' . '/' . $userId . '/' . $reportType . '/' . $dateFrom . '/' . $dateTo) }}"
                                         target="_blank">Exportar a Excel</a>
                                 {{-- @endcan --}}
                             </div>

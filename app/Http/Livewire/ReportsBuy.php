@@ -18,7 +18,7 @@ class ReportsBuy extends Component
 
     public function mount()
     {
-        $this->componentName='Reportes de Ventas';
+        $this->componentName='Reportes de Compras';
         $this->info =[];
         $this->details =[];
         $this->sumDetails =0;
@@ -29,14 +29,14 @@ class ReportsBuy extends Component
     }
     public function render()
     {
-    return view('livewire.reporteShopping.reports-buy',[
-    'users' => User::orderBy('name','asc')->get()
-    ])->extends('layouts.theme.app')
-    ->section('content');
+        return view('livewire.reporteShopping.reports-buy',[
+            'users' => User::orderBy('name','asc')->get()
+        ])->extends('layouts.theme.app')
+        ->section('content');
     }
 
     protected $listeners = [
-    'cancelBuy' => 'cancelBuy'
+        'cancelBuy' => 'cancelBuy'
     ];
 
     public function BuyByDate()
@@ -55,15 +55,17 @@ class ReportsBuy extends Component
         }
         if($this->userId == 0)
         {
-        $this->info =Shopping::join('users as u', 'u.id', 'shoppings.user_id')
+            $this->info =Shopping::join('users as u', 'u.id', 'shoppings.user_id')
             ->select('shoppings.*','u.name as user')
             ->whereBetween('shoppings.created_at',[$from, $to])
+            ->orderBy('shoppings.created_at','asc')
             ->get();
         }else{
             $this->info =Shopping::join('users as u', 'u.id', 'shoppings.user_id')
             ->select('shoppings.*','u.name as user')
             ->whereBetween('shoppings.create_at',[$from, $to])
             ->where('user_id', $this->userId)
+            ->orderBy('shoppings.created_at','asc')
             ->get();
         }
     }

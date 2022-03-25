@@ -48,10 +48,14 @@ Route::middleware(['auth'])->group(function(){
     Route::get('logs', Logs::class)->name('logs');
 
     // Reportes PDF
-    Route::get('report/pdf/{user}/{type}/{f1}/{f2}', [ExportController::class, 'reportPDF']);
-    Route::get('report/pdf/{user}/{type}', [ExportController::class, 'reportPDF']);
+    Route::get('report/pdf/{user}/{type}/{f1}/{f2}', [ExportController::class, 'reportPDFVEntas']);
+    Route::get('report/pdf/{user}/{type}', [ExportController::class, 'reportPDFVentas']);
+    Route::get('report/pdfCompras/{user}/{type}/{f1}/{f2}', [ExportController::class, 'reportPDFCompras']);
+    Route::get('report/pdfCompras/{user}/{type}', [ExportController::class, 'reportPDFCompras']);
 
     //reporte Excel
     Route::get('report/excel/{user}/{type}/{f1}/{f2}', [ExportController::class, 'reporteExcel']);
     Route::get('report/excel/{user}/{type}', [ExportController::class, 'reporteExcel']);
+    Route::get('report/excelCompras/{user}/{type}/{f1}/{f2}', [ExportController::class, 'reporteExcelShoppings']);
+    Route::get('report/excelCompras/{user}/{type}', [ExportController::class, 'reporteExcelShoppings']);
 });

@@ -175,12 +175,37 @@
                                         style="width:70px;height:70px">
                                     </lord-icon>
                                 </div>
-                                <span>REPORTES</span>
+                                <span>REPORTES VENTAS</span>
                             </div>
                         </a>
                     </li>
                 @endcan
-
+                <li class="">
+                        <a href="{{ route('reporteCompras') }}" class="menu-toggle" data-active='false'>
+                            <div class="base-menu">
+                                <div class="base-icons">
+                                    <lord-icon src="https://assets5.lottiefiles.com/packages/lf20_g4rf74et.json"
+                                        trigger="loop-on-hover" colors="primary:#ffffff,secondary:#08a88a"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
+                                </div>
+                                <span>REPORTE COMPRAS</span>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{{ route('logs') }}" class="menu-toggle" data-active='false'>
+                            <div class="base-menu">
+                                <div class="base-icons">
+                                    <lord-icon src="https://assets5.lottiefiles.com/packages/lf20_g4rf74et.json"
+                                        trigger="loop-on-hover" colors="primary:#ffffff,secondary:#08a88a"
+                                        style="width:70px;height:70px">
+                                    </lord-icon>
+                                </div>
+                                <span>REGISTROS</span>
+                            </div>
+                        </a>
+                    </li>
             </ul>
         </nav>
     </div>

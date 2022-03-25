@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Models\Sale;
+use App\Models\Shopping;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithStyles;
 use Carbon\Carbon;
 
 
-class SalesExport implements FromCollection, WithHeadings, WithCustomStartCell, WithTitle, WithStyles
+class ShoppingsExport implements FromCollection, WithHeadings, WithCustomStartCell, WithTitle, WithStyles
 {
 
     protected $userId, $dateFrom, $dateTo, $reportType;
@@ -26,9 +26,9 @@ class SalesExport implements FromCollection, WithHeadings, WithCustomStartCell, 
 
     public function collection()
     {
-        $data =[];
+        $info =[];
 
-        if($this->reportType == 1) //ventas por fecha
+        if($this->reportType == 1) //Compras por Fecha
         {
             $from = Carbon::parse($this->dateFrom)->format('Y-m-d') . ' 00:00:00';
             $to = Carbon::parse($this->dateTo)->format('Y-m-d') . ' 23:59:59';
@@ -39,19 +39,25 @@ class SalesExport implements FromCollection, WithHeadings, WithCustomStartCell, 
 
         if($this->userId == 0)
         {
-            $data = Sale::join('users as u', 'u.id', 'sales.user_id')
-            ->select('sales.id','sales.total','sales.items','sales.status','u.name as user','sales.created_at')
-            ->whereBetween('sales.created_at',[$from, $to])
+            $info = Shopping::join('users as u', 'u.id', 'shoppings.user_id')
+            ->select('shoppings.id','shoppings.total','shoppings.items','shoppings.status','shoppings.created_at','u.name as user')
+            ->whereBetween('shoppings.created_at',[$from, $to])
             ->get();
+
+            // $this->info =Shopping::join('users as u', 'u.id', 'shoppings.user_id')
+            // ->select('shoppings.*','u.name as user')
+            // ->whereBetween('shoppings.created_at',[$from, $to])
+            // ->orderBy('shoppings.created_at','asc')
+            // ->get();
         }else{
-            $data =Sale::join('users as u', 'u.id', 'sales.user_id')
-            ->select('sales.id','sales.total','sales.items','sales.status','u.name as user','sales.created_at')
-            ->whereBetween('sales.create_at',[$from, $to])
+            $info =Shopping::join('users as u', 'u.id', 'shoppings.user_id')
+            ->select('shoppings.id','shoppings.total','shoppings.items','shoppings.status','shoppings.created_at','u.name as user')
+            ->whereBetween('shoppings.create_at',[$from, $to])
             ->where('user_id', $this->userId)
             ->get();
         }
 
-        return $data;
+        return $info;
     }
 
     // cabeceras del reporte excel
@@ -76,7 +82,7 @@ class SalesExport implements FromCollection, WithHeadings, WithCustomStartCell, 
 
     public function title(): string
     {
-        return 'Reporte de Ventas';
+        return 'Reporte de Compras';
     }
 
 }

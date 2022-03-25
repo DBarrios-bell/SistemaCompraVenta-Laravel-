@@ -108,11 +108,11 @@
                                                         <i class="fas fa-list"></i>
                                                     </button>
                                                     @if ($d->status == 'Pago')
-                                                    <a href="javascript:void(0)"
-                                                        onclick="cancelSale({{ $d->id }})" class="btn btn-dark btn-sm"
-                                                        title="Revertir">
-                                                        <i class="fas fa-undo"></i>
-                                                    </a>
+                                                        <a href="javascript:void(0)"
+                                                            onclick="cancelSale({{ $d->id }})"
+                                                            class="btn btn-dark btn-sm" title="Revertir">
+                                                            <i class="fas fa-undo"></i>
+                                                        </a>
                                                     @endif
                                                 </h6>
                                             </td>
@@ -129,6 +129,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{-- {{$data->links()}} --}}
                         </div>
                     </div>
                 </dir>

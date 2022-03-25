@@ -58,12 +58,14 @@ class Reports extends Component
             $this->data =Sale::join('users as u', 'u.id', 'sales.user_id')
             ->select('sales.*','u.name as user')
             ->whereBetween('sales.created_at',[$from, $to])
+            ->orderBy('sales.id','asc')
             ->get();
         }else{
             $this->data =Sale::join('users as u', 'u.id', 'sales.user_id')
             ->select('sales.*','u.name as user')
             ->whereBetween('sales.create_at',[$from, $to])
             ->where('user_id', $this->userId)
+            ->orderBy('sales.id','asc')
             ->get();
         }
     }

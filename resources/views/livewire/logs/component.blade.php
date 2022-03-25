@@ -6,6 +6,64 @@
                     <b class="text-center">Registros Del Sistema</b>
                 </h4>
             </div>
+            <div class="widget-content">
+                <diw class="row">
+                    {{-- <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            <label>Modulos</label>
+                            <select wire:model="moduloid" class="form-control">
+                                <option value="0" disable>Elegir</option>
+                                @foreach ($logs as $log)
+                                    <option value="{{$log->categories}}">{{$log->categories}}</option>
+                                @endforeach
+                            </select>
+                            @error('moduloid')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div> --}}
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            <label>Usuario</label>
+                            <select wire:model="userid" class="form-control">
+                                <option value="0" disable>Elegir</option>
+                                @foreach ($users as $u)
+                                    <option value="{{$u->id}}">{{$u->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('userid')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-13 col-md-3">
+                        <div class="form-group">
+                            <label>Fecha Inicial</label>
+                            <input type="date" wire:model.lazy="fromDate" class="form-control">
+                            @error('fromDate')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-sm-13 col-md-3">
+                        <div class="form-group">
+                            <label>Fecha Final</label>
+                            <input type="date" wire:model.lazy="toDate" class="form-control">
+                            @error('toDate')
+                            <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
+                    {{-- botones que se alinean al aparecer  --}}
+                    {{-- <div class="col-sm-12 col-md-3 align-self-center d-flex justify-content-around">
+                        @if ($userid > 0 && $fromDate != null && $toDate != null)
+                            <button wire:click="$refresh" class="btn btn-dark btn-block">Consultar</button>
+                        @endif
+                            <button wire:click.prevent="Print()" type="button"
+                            class="btn btn-dark">Imprimir</button>
+                    </div> --}}
+                </diw>
+            </div>
             @include('common.searchbox')
             <div class="row">
                 <div class="col-sm-10 col-md-12">
@@ -34,7 +92,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{$logs->links()}}
+                        {{-- {{$logs->links()}} --}}
                     </div>
                 </div>
             </div>
