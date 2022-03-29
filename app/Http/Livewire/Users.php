@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Role;
 use Livewire\withFileUploads;
 use Livewire\withPagination;
 use App\Models\Sale;
+use App\Models\Shopping;
 use App\Models\User;
 
 class Users extends Component
@@ -184,8 +185,14 @@ class Users extends Component
     {
         if($user){
             $sales = Sale::where('user_id' , $user->id)->count();
+            $shopping = Shopping::where('user_id' , $user->id)->count();
+            $logs = Log::where('user_id' , $user->id)->count();
             if($sales > 0){
                 $this->emit('user-withsales', 'Usuario Con Ventas Registradas');
+            }else if($shopping > 0){
+                $this->emit('user-withsales', 'Usuario Con Compras Registradas');
+            }else if($logs > 0){
+                $this->emit('user-withsales', 'Usuario Con Movimientos');
             }else{
                 $user->delete();
                 Logs::logs('Eliminar',"Id: {$user->id} - nombre: {$user->name}", $this->componentName);

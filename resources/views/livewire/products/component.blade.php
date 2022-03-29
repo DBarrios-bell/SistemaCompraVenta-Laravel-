@@ -30,7 +30,7 @@
                                 <th class="table-th text-white text-center">CATEGORIA</th>
                                 <th class="table-th text-white text-center">PRECIO</th>
                                 <th class="table-th text-white text-center">STOCK</th>
-                                <th class="table-th text-white text-center">INV. MIN</th>
+                                {{-- <th class="table-th text-white text-center">INV. MIN</th> --}}
                                 <th class="table-th text-white text-center">IMAGEN</th>
                                 <th class="table-th text-white text-center">ACTIONS</th>
                             </tr>
@@ -42,8 +42,8 @@
                                 <td><h6 class="text-center">{{$product->barcode}}</h6></td>
                                 <td><h6 class="text-center">{{$product->category}}</h6></td>
                                 <td><h6 class="text-center">{{$product->price}}</h6></td>
-                                <td><h6 class="text-center">{{$product->stock}}</h6></td>
-                                <td><h6 class="text-center">{{$product->alerts}}</h6></td>
+                                <td class="text-center"><h6 <span class="badge text-center {{ $product->stock > $product->alerts ? 'badge-success' : 'badge-danger'}} text-uppercase">{{$product->stock}}</span></h6></td>
+                                {{-- <td><h6 class="text-center">{{$product->alerts}}</h6></td> --}}
 
                                 <td class="text-center">
                                     <span>

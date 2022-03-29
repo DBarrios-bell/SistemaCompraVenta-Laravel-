@@ -16,7 +16,7 @@ class Products extends Component
     use WithFileUploads;
 
     public $name, $barcode, $cost, $price, $stock, $alerts, $categoryid, $search, $image, $selected_id, $pageTitle, $componentName;
-    private $pagination = 5;
+    private $pagination = 30;
 
     //paginacion
     public function paginationView(){
@@ -43,12 +43,12 @@ class Products extends Component
                         ->where('products.name', 'like','%'. $this->search . '%')
                         ->orwhere('products.barcode', 'like', '%'. $this->search . '%' )
                         ->orwhere('c.name','like','%' . $this->search . '%')
-                        ->orderBy('products.name', 'asc')
+                        ->orderBy('products.stock', 'asc')
                         ->paginate($this->pagination);
         else
             $products = Product::join('categories as c' , 'c.id', 'products.category_id')
                         ->select('products.*','c.name as category')
-                        ->orderBy('products.name', 'asc')
+                        ->orderBy('products.stock', 'asc')
                         ->paginate($this->pagination);
 
         return view('livewire.products.component',[

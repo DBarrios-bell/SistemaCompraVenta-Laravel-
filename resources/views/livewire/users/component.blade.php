@@ -91,7 +91,7 @@
         })
         window.livewire.on('user-deleted', Msg =>{
             $('#theModal').modal('hide')
-            noty(Msg)
+            noty(Msg,2)
         })
         window.livewire.on('hide-modal', Msg =>{
             $('#theModal').modal('hide')
@@ -100,7 +100,7 @@
             $('#theModal').modal('show')
         })
         window.livewire.on('user-withsales', Msg =>{
-            noty(Msg)
+            noty(Msg,2)
         })
     });
 

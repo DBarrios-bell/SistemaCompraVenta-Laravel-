@@ -15,6 +15,7 @@ use App\Http\Livewire\Buy;
 use App\Http\Livewire\Logs;
 use App\Http\Livewire\ReportsBuy;
 use App\http\Livewire\Users;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -27,7 +28,7 @@ Auth::routes();
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
 // Protege la ruta validando q el usuario este registrado
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth','checkbanned'])->group(function(){
     Route::get('categories', Categories::class)->name('categorias');
     Route::get('products', Products::class)->name('productos');
     Route::get('coins', Coins::class)->name('coins')->middleware('role:Administrador'); //protegiendo solo una ruta
