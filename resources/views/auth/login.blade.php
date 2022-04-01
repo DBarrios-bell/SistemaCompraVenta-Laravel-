@@ -6,23 +6,11 @@
                 <div class="form-content ">
                     <br>
                     <h1 class="text-center form-wrap"
-                        style="color: #F7F8FF; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 45px">
-                        <span class=""><b>Sistema de Ventas</b></span>
-                    </h1>
+                        style="color: #F7F8FF; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 50px""><span class="
+                        "><b>Sistema de Ventas</b></span></h1>
                     <form class="text-left mt-5" action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="form">
-                            {{-- <div id="username-field" class="input mt-3">
-                                <input id="puntoVenta" name="puntoVenta" type="puntoVenta"
-                                    class="form-control @error('puntoVenta') is-invalid @enderror"
-                                    placeholder="Punto venta" value="{{ old('puntoVenta') }}" required
-                                    autocomplete="puntoVenta" autofocus>
-                                @error('puntoVenta')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div> --}}
                             <div id="username-field" class="input mt-3">
                                 @if (session('locked'))
                                     <div class="alert alert-danger text-center " style="color:#590202;font-size: 15px">
@@ -30,6 +18,8 @@
                                        <strong> {{ session('locked') }}</strong>
                                     </div>
                                 @endif
+                            </div>
+                            <div id="username-field" class="input mt-4">
                                 <input id="email" name="email" type="email"
                                     class="form-control @error('email') is-invalid @enderror"
                                     placeholder="Correo Electronico" value="{{ old('email') }}" required
@@ -59,7 +49,7 @@
                                 @endif
                             </div>
                             {{-- <div class="row mb-3"> --}}
-                            <div class="mt-3">
+                            <div class="mt-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                         {{ old('remember') ? 'checked' : '' }}>
@@ -71,15 +61,15 @@
                                 </div>
                                 {{-- </div> --}}
                             </div>
-                            <br>
+                            <br><br>
                             <div class="field mt-2">
                                 <button type="submit" class="btn btn-link btn-block a:link" value=""
                                     style="color: #3b3f5c; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 25px">Iniciar
                                     Sesion</button>
                             </div>
+                            <p style="padding: -3%" class="terms-conditions text-center text-light">© 2022 All Rights Reserved. V1.0</p>
                         </div>
                     </form>
-                    <p style="padding: 0%" class="terms-conditions text-center text-light">© 2022 All Rights Reserved. Versión 1.0</p>
                 </div>
                 </form>
             </div>

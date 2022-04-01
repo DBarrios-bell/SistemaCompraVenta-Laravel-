@@ -25,7 +25,7 @@ class Pos extends Component
 
     public function render()
     {
-        return view('livewire.pos.component', [
+        return view('livewire.pos.component',[
             'denominations' => Denomination::orderBy('value','desc')->get(),
             'cart' => Cart::getContent()->sortBy('name')
         ])
@@ -33,7 +33,7 @@ class Pos extends Component
         ->section('content');
     }
 
-    // calculo del cambio y el efectivo 
+    // calculo del cambio y el efectivo
     public function ACash($value)
     {
         $this->efectivo += ($value == 0 ? $this->total : $value);

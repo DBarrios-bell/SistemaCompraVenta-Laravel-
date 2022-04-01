@@ -12,5 +12,7 @@ class Company extends Model
 
     protected $fillable =['name','address','phone','tapayer_id'];
 
-
+    public function SalePoinst(){
+        return $this->hasMany(SalePoints::class);
+    }
 }

@@ -30,7 +30,11 @@ class User extends Authenticatable
     ];
 
     public function logs(){
-    return $this->hasMany(Logs::class);
+        return $this->hasMany(Logs::class);
+    }
+
+    public function user_sale_points(){
+        return $this->hasMany(UserSalePoints::class);
     }
 
     public function getImagenAttribute(){

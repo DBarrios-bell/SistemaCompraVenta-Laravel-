@@ -14,6 +14,7 @@ use App\http\Livewire\Roles;
 use App\Http\Livewire\Buy;
 use App\Http\Livewire\Logs;
 use App\Http\Livewire\ReportsBuy;
+use App\Http\Livewire\SalePoint;
 use App\http\Livewire\Users;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -29,10 +30,11 @@ Auth::routes();
 
 // Protege la ruta validando q el usuario este registrado
 Route::middleware(['auth','checkbanned'])->group(function(){
+    Route::get('/', SalePoint::class)->name('salepoint');
     Route::get('categories', Categories::class)->name('categorias');
     Route::get('products', Products::class)->name('productos');
     Route::get('coins', Coins::class)->name('coins')->middleware('role:Administrador'); //protegiendo solo una ruta
-    Route::get('/', Pos::class)->name('pos');
+    Route::get('pos', Pos::class)->name('pos');
     Route::get('buy', Buy::class)->name('buy');
 
     //protege las de los usuario que no tiene el rol

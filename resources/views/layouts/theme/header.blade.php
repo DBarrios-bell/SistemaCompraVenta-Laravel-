@@ -20,9 +20,26 @@
                 </a>
             </li>
         </ul>
+        <script>
+            
+            // window.onload = () => {
+                // const session = sessionStorage.getItem("id"));
+                const session = sessionStorage.getItem('id');
+                // sessionId.value = session;
+                // alert(session);
+                // }
+                // console.log('session =>', session)
+                
+                // const objeto = {nombre:"pedro",edad:20};
+                // console.log('id')
+                </script>
 
-        <livewire:search>
+
+<livewire:search>
+    {{-- <p>vete al diabl</p> --}}
+    
             @auth
+            <p id="sessionId"></p>
             <ul class="navbar-item flex-row navbar-dropdown">
                 {{-- <li class="nav-item dropdown language-dropdown more-dropdown">
                     <div class="dropdown  custom-dropdown-icon">

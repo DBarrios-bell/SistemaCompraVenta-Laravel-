@@ -54,6 +54,7 @@ class Users extends Component
         $this->phone ='';
         $this->image ='';
         $this->search ='';
+        $this->profile ='Elegir';
         $this->status ='Elegir';
         $this->selected_id =0;
         $this->resetValidation();
@@ -65,7 +66,7 @@ class Users extends Component
         $this->selected_id = $user->id;
         $this->name = $user->name;
         $this->phone = $user->phone;
-        $this->profile = $this->profile;
+        $this->profile = $user->profile;
         $this->status = $this->status;
         $this->email = $user->email;
         $this->password = '';

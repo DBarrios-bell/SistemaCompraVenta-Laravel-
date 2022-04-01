@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage; //uso de img
 use Livewire\WithFileUploads;  //trait para cargue de img livewire
 use Livewire\WithPagination;
@@ -16,13 +17,14 @@ class Categories extends Component
     use WithFileUploads;
     use WithPagination;
 
-    public $name, $search, $image, $selected_id, $pageTitle, $componentName;
+    public $name, $search, $image, $selected_id, $pageTitle, $componentName, $session;
     private $pagination = 5;
 
 
     public function mount(){
         $this->pageTitle = 'Listado';
         $this->componentName = 'Categorias';
+        $this->session = session("ptventa");
     }
 
     //paginacion personalizada
@@ -37,7 +39,8 @@ class Categories extends Component
            $data = Category::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
             // $data = Category::search('name' , 'like');
          else
-        $data = Category::orderBy('id', 'desc')->paginate($this->pagination);
+        $data = Category::where('pventa_id', $this->session)->orderBy('id', 'desc')
+        ->paginate($this->pagination);
         return view('livewire.category.categories', ['categories' => $data])
         ->extends('layouts.theme.app')
         ->section('content');
@@ -59,7 +62,7 @@ class Categories extends Component
         ];
         $messages =[
             'name.required' => 'Nombre de la categoria es requerido',
-            'name.unique' => 'El nombre de la categoria ya existe',
+            'name.unique' => 'La categoria ya existe',
             'name.min' => 'El nombre de la categoria debe tener almenos 3 caracteres'
         ];
 
@@ -67,10 +70,11 @@ class Categories extends Component
 
         $category = Category::create([
             'name' => $this->name,
-            // 'image' => $this->image
+            // 'Salepoint_id'=> $this->session,
+            'pventa_id'=> $this->session,
         ]);
 
-        $customFileName;
+        // $customFileName;
         if($this->image){
             $customFileName = uniqid() . '_.' . $this->image->extension();
             $this->image->storeAs('public/categories/', $customFileName);
@@ -143,9 +147,8 @@ class Categories extends Component
                 }
                 Logs::logs('Eliminar',"Id: {$category->id} - nombre: {$category->name}", $this->componentName);
                 $this->resetUI();
-                $this->emit('category-deleted', 'Producto Eliminado :/');
+                $this->emit('category-deleted', 'Categoria Eliminada :/');
             }
         }
     }
 }
-

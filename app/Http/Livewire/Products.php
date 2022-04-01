@@ -93,7 +93,7 @@ class Products extends Component
             'category_id' => $this->categoryid
         ]);
 
-        $customFileName;
+        // $customFileName;
         if($this->image){
             $customFileName = uniqid() . '_.' . $this->image->extension(); //para personalizar nombre del archivo
             $this->image->storeAs('public/products', $customFileName);
