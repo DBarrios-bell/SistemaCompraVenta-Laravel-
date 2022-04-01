@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddSalepointIdToShoppingsTable extends Migration
+class AddSalepointIdToCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddSalepointIdToShoppingsTable extends Migration
      */
     public function up()
     {
-        Schema::table('shoppings', function (Blueprint $table) {
-            $table->unsignedBigInteger('salepoint_id')->after("status");
+        Schema::table('categories', function (Blueprint $table) {
+            $table->unsignedBigInteger('salepoint_id')->after("id");
             $table->foreign('salepoint_id')->references('id')->on('sale_points');
         });
     }
@@ -26,8 +26,8 @@ class AddSalepointIdToShoppingsTable extends Migration
      */
     public function down()
     {
-        Schema::table('shoppings', function (Blueprint $table) {
-            $table->dropForeign('shoppings_salepoint_id_foreign');
+        Schema::table('categories', function (Blueprint $table) {
+            $table->dropForeign('categories_salepoint_id_foreign');
             $table->dropColumn("salepoint_id");
         });
     }
