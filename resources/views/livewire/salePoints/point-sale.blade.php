@@ -19,22 +19,6 @@
 <option value="13">Texto Two</option>
 </select> --}}
 <script type="text/javascript">
-    function ShowSelected() {
-        /* Para obtener el valor */
-        var cod = document.getElementById("ptventa").value;
-        //alert(cod);
-        /* Para obtener el texto */
-        var combo = document.getElementById("ptventa");
-        var selected = combo.options[combo.selectedIndex].text;
-        if (selected != 'Elegir') {
-            //guarda el sessionStorage y lo actualiza
-            //sessionStorage.setItem('id', cod);
-            //console.log(sessionStorage.getItem('id'));
-            alert(selected);
-            window.location.href = "http://127.0.0.1:8000/categories";
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', function(){
 
         window.livewire.on('point-added', msg =>{

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Log;
+use App\Models\SalePoints;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -13,12 +14,13 @@ class Logs extends Component
 {
     use WithPagination;
 
-    public $userid, $toDate, $fromDate, $search;
+    public $userid, $toDate, $fromDate, $search, $ptventa;
     private $pagination = 10;
 
     public function mount()
     {
         $this->userid = 0;
+        $this->ptventa = 0;
     }
 
     //paginacion
@@ -32,7 +34,8 @@ class Logs extends Component
         $this->paginationView();
         return view('livewire.logs.component', [
             // 'logs' => $logs,
-            'users' => User::orderBy('name', 'asc')->get()
+            'users' => User::orderBy('name', 'asc')->get(),
+            'salepoints' => SalePoints::orderBy('id', 'desc')->get(),
         ])
         ->extends('layouts.theme.app')
         ->section('content');
@@ -56,6 +59,7 @@ class Logs extends Component
             ->select('logs.*', 'u.name as user')
             ->whereBetween('logs.created_at', [$fi, $ff])
             ->where('user_id', $this->userid)
+            ->where('salepoint', $this->ptventa)
             ->get();
         }
     }
@@ -66,7 +70,8 @@ class Logs extends Component
         'action' => $action,
         'message' => $message,
         'categories' => $categories,
-        'user_id' => Auth::user()->id
+        'user_id' => Auth::user()->id,
+        'salepoint' => session('ptventa'),
         ]);
         $log->save();
     }

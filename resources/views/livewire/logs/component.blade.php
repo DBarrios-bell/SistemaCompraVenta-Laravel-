@@ -36,6 +36,20 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="col-sm-12 col-md-3">
+                        <div class="form-group">
+                            <label>Punto Venta</label>
+                            <select wire:model="ptventa" class="form-control">
+                                <option value="0" disable>Elegir</option>
+                                @foreach ($salepoints as $salepoint)
+                                    <option value="{{$salepoint->id}}">{{$salepoint->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('ptventa')
+                                <span class="text-danger">{{$message}}</span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="col-sm-13 col-md-3">
                         <div class="form-group">
                             <label>Fecha Inicial</label>

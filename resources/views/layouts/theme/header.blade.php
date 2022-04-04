@@ -20,28 +20,17 @@
                 </a>
             </li>
         </ul>
-        <script>
-            
-            // window.onload = () => {
-                // const session = sessionStorage.getItem("id"));
-                const session = sessionStorage.getItem('id');
-                // sessionId.value = session;
-                // alert(session);
-                // }
-                // console.log('session =>', session)
-                
-                // const objeto = {nombre:"pedro",edad:20};
-                // console.log('id')
-                </script>
 
 
-<livewire:search>
-    {{-- <p>vete al diabl</p> --}}
-    
+
+        <livewire:search>
             @auth
-            <p id="sessionId"></p>
-            <ul class="navbar-item flex-row navbar-dropdown">
-                {{-- <li class="nav-item dropdown language-dropdown more-dropdown">
+                {{-- <h6>Punto Venta >  </h6> --}}
+                <h5 style="color: #F7F8FF; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size: 21px">
+                    <a href="{{ route('salepoint') }}"> {{session('ptventa_name')}}</a>
+                </h5>
+                <ul class="navbar-item flex-row navbar-dropdown">
+                    {{-- <li class="nav-item dropdown language-dropdown more-dropdown">
                     <div class="dropdown  custom-dropdown-icon">
                         <a class="dropdown-toggle btn" href="#" role="button" id="customDropdown" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false"><img src="assets/img/ca.png"
@@ -69,7 +58,7 @@
                     </div>
                 </li> --}}
 
-                {{-- <li class="nav-item dropdown message-dropdown">
+                    {{-- <li class="nav-item dropdown message-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="messageDropdown"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -140,7 +129,7 @@
                     </div>
                 </li> --}}
 
-                {{-- <li class="nav-item dropdown notification-dropdown">
+                    {{-- <li class="nav-item dropdown notification-dropdown">
                     <a href="javascript:void(0);" class="nav-link dropdown-toggle" id="notificationDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg><span class="badge badge-success"></span>
                     </a>
@@ -198,27 +187,27 @@
                     </div>
                 </li> --}}
 
-                <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
-                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
+                        <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
-                        <lord-icon src="https://cdn.lordicon.com/nobciafz.json" trigger="loop-on-hover"
-                                    colors="primary:#07a889,secondary:#be6885" style="width:70px;height:70px">
-                                    </lord-icon>
+                            <lord-icon src="https://cdn.lordicon.com/nobciafz.json" trigger="loop-on-hover"
+                                colors="primary:#07a889,secondary:#be6885" style="width:70px;height:70px">
+                            </lord-icon>
 
-                    </a>
-                    <div class="dropdown-menu position-absolute animated fadeInUp"
-                        aria-labelledby="userProfileDropdown">
-                        <div class="user-profile-section">
-                            <div class="media mx-auto">
+                        </a>
+                        <div class="dropdown-menu position-absolute animated fadeInUp"
+                            aria-labelledby="userProfileDropdown">
+                            <div class="user-profile-section">
+                                <div class="media mx-auto">
                                     {{-- <img src=" {{asset('storage/users/' )}} . {{Auth::user()->image}}" height="30" width="40" class="rounded" class="card-img-top img-fluid"> --}}
-                                <div class="media-body">
-                                    <h5>{{ auth()->user()->name}}</h5>
-                                    <p>{{ auth()->user()->profile}}</p>
+                                    <div class="media-body">
+                                        <h5>{{ auth()->user()->name }}</h5>
+                                        <p>{{ auth()->user()->profile }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {{-- <div class="dropdown-item">
+                            {{-- <div class="dropdown-item">
                             <a href="user_profile.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
                                 <span>My Profile</span>
@@ -236,33 +225,33 @@
                                 <span>Lock Screen</span>
                             </a>
                         </div> --}}
-                        <div class="dropdown-item">
-                            {{-- <a href="{{route('login')}}"> --}}
-                            <a class="nav-link" href="#" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();">
+                            <div class="dropdown-item">
+                                {{-- <a href="{{route('login')}}"> --}}
+                                <a class="nav-link" href="#" onclick="event.preventDefault();
+                                document.getElementById('logout-form').submit();">
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" class="feather feather-log-out">
-                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                    <polyline points="16 17 21 12 16 7"></polyline>
-                                    <line x1="21" y1="12" x2="9" y2="12"></line>
-                                </svg>
-                                <span>Cerrar Sesión</span>
-                            </a>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 15 15"
+                                        fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
+                                        stroke-linejoin="round" class="feather feather-log-out">
+                                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                        <polyline points="16 17 21 12 16 7"></polyline>
+                                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                                    </svg>
+                                    <span>Cerrar Sesión</span>
+                                </a>
+                            </div>
                         </div>
-                    </div>
                     @else
-                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id=""
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <a href="{{route('login')}}"> <b>Iniciar Sesión</b></a>
-                        {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> --}}
-                        <lord-icon src="https://cdn.lordicon.com/nobciafz.json" trigger="loop-on-hover"
-                                    colors="primary:#07a889,secondary:#be6885" style="width:70px;height:70px">
-                        </lord-icon>
-                    </a>
-                </li>
-            </ul>
+                        <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <a href="{{ route('login') }}"> <b>Iniciar Sesión</b></a>
+                            {{-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg> --}}
+                            <lord-icon src="https://cdn.lordicon.com/nobciafz.json" trigger="loop-on-hover"
+                                colors="primary:#07a889,secondary:#be6885" style="width:70px;height:70px">
+                            </lord-icon>
+                        </a>
+                    </li>
+                </ul>
             @endauth
     </header>
 </div>

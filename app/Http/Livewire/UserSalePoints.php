@@ -10,9 +10,5 @@ class UserSalePoints extends Component
     {
         return view('livewire.user-sale-points');
 
-        // protected $fillable[
-        //     'user_id',
-        //     'salepoint_id',
-        // ];
     }
 }

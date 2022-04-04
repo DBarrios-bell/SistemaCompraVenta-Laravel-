@@ -16,6 +16,7 @@ class Shopping extends Model
         'change',
         'status',
         'user_id',
-        'provider_id'
+        'provider_id',
+        'salepoint_id',
     ];
 }

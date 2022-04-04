@@ -11,10 +11,10 @@
                             <div class="col-sm-12">
                                 <h6>Elige el Usuario</h6>
                                 <div class="form-group">
-                                    <select class="form-control">
-                                        <option wire:model="userId" value="0">Todos</option>
+                                    <select wire:model="userId" class="form-control">
+                                        <option value="0">Todos</option>
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            <option value="{{$user->id}}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

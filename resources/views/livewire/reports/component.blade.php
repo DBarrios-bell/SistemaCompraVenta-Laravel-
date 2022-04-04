@@ -11,10 +11,10 @@
                             <div class="col-sm-12">
                                 <h6>Elige el Usuario</h6>
                                 <div class="form-group">
-                                    <select class="form-control">
-                                        <option wire:model="userId" value="0">Todos</option>
+                                    <select wire:model="userId" class="form-control">
+                                        <option value="0">Todos</option>
                                         @foreach ($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            <option value="{{$user->id}}">{{ $user->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -63,11 +63,12 @@
                             <table class="table table-bordered table-striped mt-1" id="myTable">
                                 <thead class="text-white" style="background: #3B3F5C">
                                     <tr>
-                                        <th class="table-th text-white text-center">FOLIO</th>
+                                        <th class="table-th text-white text-center">ID</th>
                                         <th class="table-th text-white text-center">TOTAL</th>
-                                        <th class="table-th text-white text-center">ITEMS</th>
+                                        <th class="table-th text-white text-center">ITEM</th>
                                         <th class="table-th text-white text-center">STATUS</th>
                                         <th class="table-th text-white text-center">USUARIO</th>
+                                        <th class="table-th text-white text-center">PUNTO VENTA</th>
                                         <th class="table-th text-white text-center">FECHA</th>
                                         <th class="table-th text-white text-center" width="18%"></th>
                                         {{-- <th class="table-th text-white text-center" width="60px"></th> --}}
@@ -97,6 +98,9 @@
                                             </td>
                                             <td class="text-center">
                                                 <h6>{{ $d->user }}</h6>
+                                            </td>
+                                            <td class="text-center">
+                                                <h6>{{ $d->puntoventa }}</h6>
                                             </td>
                                             <td class="text-center">
                                                 <h6>{{ \Carbon\Carbon::parse($d->created_at)->format('d-m-Y') }}</h6>

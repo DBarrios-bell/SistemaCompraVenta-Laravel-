@@ -22,19 +22,19 @@
                         <tbody>
                             @foreach ($details as $d)
                             <tr>
-                                <td><h6>{{$d->id}}</h6></td>
-                                <td><h6>{{$d->product}}</h6></td>
-                                <td><h6>{{number_format($d->price,2)}}</h6></td>
-                                <td><h6>{{number_format($d->quantity,0)}}</h6></td>
-                                <td><h6>{{number_format($d->price * $d->quantity,2)}}</h6></td>
+                                <td><h6 class="text-center">{{$d->id}}</h6></td>
+                                <td><h6 class="text-center">{{$d->product}}</h6></td>
+                                <td><h6 class="text-center">{{number_format($d->price,2)}}</h6></td>
+                                <td><h6 class="text-center">{{number_format($d->quantity,0)}}</h6></td>
+                                <td><h6 class="text-center">{{number_format($d->price * $d->quantity,2)}}</h6></td>
                             </tr>
                             @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="3"><h5 class="text-center font-weigth-bold">TOTALES:</h5></td>
-                                <td><h5 class="text-center">{{$countDetails}}</h5></td>
-                                <td><h5 class="text-center">${{number_format($sumDetails,2)}}</h5></td>
+                                <td colspan="3"><h6 class="text-center font-weigth-bold">TOTALES:</h6></td>
+                                <td><h6 class="text-center">{{$countDetails}}</h6></td>
+                                <td><h6 class="text-center">${{number_format($sumDetails,2)}}</h6></td>
                             </tr>
                         </tfoot>
                     </table>

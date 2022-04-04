@@ -63,7 +63,7 @@ class ReportsBuy extends Component
         }else{
             $this->info =Shopping::join('users as u', 'u.id', 'shoppings.user_id')
             ->select('shoppings.*','u.name as user')
-            ->whereBetween('shoppings.create_at',[$from, $to])
+            ->whereBetween('shoppings.created_at',[$from, $to])
             ->where('user_id', $this->userId)
             ->orderBy('shoppings.created_at','asc')
             ->get();

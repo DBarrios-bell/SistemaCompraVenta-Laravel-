@@ -12,7 +12,7 @@ use DB;
 
 class Pos extends Component
 {
-    public $total, $itemsQuantity, $efectivo, $change, $cant;
+    public $total, $itemsQuantity, $efectivo, $change, $cant, $session;
 
     // inicializa las propiedades en 0
     public function mount(){
@@ -20,6 +20,7 @@ class Pos extends Component
         $this->change = 0;
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
+        $this->session = session("ptventa");
 
     }
 
@@ -217,7 +218,8 @@ class Pos extends Component
                 'items' => $this->itemsQuantity,
                 'cash' => $this->efectivo,
                 'change' => $this->change,
-                'user_id' => Auth()->user()->id
+                'user_id' => Auth()->user()->id,
+                'salepoint_id' => $this->session,
             ]);
             if($sale)
             {

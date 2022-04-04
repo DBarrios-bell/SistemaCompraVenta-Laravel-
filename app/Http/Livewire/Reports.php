@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB as FacadesDB;
 
 class Reports extends Component
 {
-    public $componentName, $data, $details, $sumDetails, $countDetails, $reportType, $userId, $dateFrom, $dateTo, $saleId, $sale;
+    public $componentName, $data, $details, $sumDetails, $countDetails, $reportType, $userId, $dateFrom, $dateTo, $saleId, $sale, $session;
 
     public function mount()
     {
@@ -25,6 +25,7 @@ class Reports extends Component
         $this->reportType =0;
         $this->userId =0;
         $this->saleId =0;
+        $this->session = session('ptventa');
     }
     public function render()
     {
@@ -39,36 +40,77 @@ class Reports extends Component
         'cancelSale' => 'cancelSale'
     ];
 
+    // public function SalesByDate()
+    // {
+    //     if($this->reportType == 0) //ventas del dia
+    //     {
+    //         $from = Carbon::parse(Carbon::now())->format('Y-m-d') . ' 00:00:00';
+    //         $to = Carbon::parse(Carbon::now())->format('Y-m-d') . ' 23:59:59';
+    //     }else{
+    //         $from = Carbon::parse($this->dateFrom)->format('Y-m-d') . ' 00:00:00';
+    //         $to = Carbon::parse($this->dateTo)->format('Y-m-d') . ' 23:59:59';
+    //     }
+
+    //     if($this->reportType == 1 && ($this->dateFrom == '' || $this->dateTo =='')){
+    //         return;
+    //     }
+    //     if($this->userId == 0)
+    //     {
+    //         $this->data = Sale::join('users as u', 'u.id', 'sales.user_id')
+    //             ->join('sale_points as sp', 'sp.id', 'sales.salepoint_id')
+    //             ->select('sales.*','u.name as user','sp.name as puntoventa')
+    //             // ->where('salepoint_id', $this->session)
+    //             ->whereBetween('sales.created_at',[$from, $to])
+    //             ->orderBy('sales.id','asc')
+    //             ->get();
+    //     }else{
+    //         $this->data =Sale::join('users as u', 'u.id', 'sales.user_id')
+    //             ->join('sale_points as sp', 'sp.id', 'sales.salepoint_id')
+    //             ->select('sales.*','u.name as user','sp.name as puntoventa')
+    //             ->whereBetween('sales.created_at',[$from, $to])
+    //             ->orwhere('sales.user_id', $this->userId)
+    //             // ->orwhere('salepoint_id', $this->session)
+    //             ->orderBy('sales.id','asc')
+    //             ->get();
+    //     }
+    // }
+
     public function SalesByDate()
     {
-        if($this->reportType == 0) //ventas del dia
+        if($this->reportType == 0) // ventas del dia
         {
             $from = Carbon::parse(Carbon::now())->format('Y-m-d') . ' 00:00:00';
-            $to = Carbon::parse(Carbon::now())->format('Y-m-d') . ' 23:59:59';
-        }else{
-            $from = Carbon::parse($this->dateFrom)->format('Y-m-d') . ' 00:00:00';
-            $to = Carbon::parse($this->dateTo)->format('Y-m-d') . ' 23:59:59';
+            $to = Carbon::parse(Carbon::now())->format('Y-m-d')   . ' 23:59:59';
+
+        } else {
+             $from = Carbon::parse($this->dateFrom)->format('Y-m-d') . ' 00:00:00';
+             $to = Carbon::parse($this->dateTo)->format('Y-m-d')     . ' 23:59:59';
         }
 
-        if($this->reportType == 1 && ($this->dateFrom == '' || $this->dateTo =='')){
+        if($this->reportType == 1 && ($this->dateFrom == '' || $this->dateTo =='')) {
             return;
         }
+
         if($this->userId == 0)
         {
-            $this->data =Sale::join('users as u', 'u.id', 'sales.user_id')
-            ->select('sales.*','u.name as user')
-            ->whereBetween('sales.created_at',[$from, $to])
-            ->orderBy('sales.id','asc')
+            $this->data = Sale::join('users as u','u.id','sales.user_id')
+            ->join('sale_points as sp', 'sp.id', 'sales.salepoint_id')
+            ->select('sales.*','u.name as user','sp.name as puntoventa')
+            ->whereBetween('sales.created_at', [$from, $to])
+            ->where('salepoint_id', $this->session)
             ->get();
-        }else{
-            $this->data =Sale::join('users as u', 'u.id', 'sales.user_id')
-            ->select('sales.*','u.name as user')
-            ->whereBetween('sales.create_at',[$from, $to])
+        } else {
+            $this->data = Sale::join('users as u','u.id','sales.user_id')
+            ->join('sale_points as sp', 'sp.id', 'sales.salepoint_id')
+            ->select('sales.*','u.name as user','sp.name as puntoventa')
+            ->whereBetween('sales.created_at', [$from, $to])
             ->where('user_id', $this->userId)
-            ->orderBy('sales.id','asc')
+            ->where('salepoint_id', $this->session)
             ->get();
         }
+
     }
+
 
     public function getDetails($saleId)
     {

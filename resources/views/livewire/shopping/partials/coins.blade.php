@@ -25,7 +25,10 @@
                                     Efectivo F8
                                 </span>
                             </div>
-                            <input type="number" id="cash" wire:model="efectivo" wire:keydown.enter="saveSale"
+                            <input type="number" id="cash"
+                            wire:model="efectivo"
+                            wire:keydown.enter.prevent="AChange({{ $change }})"
+                            wire:keydown.tab="AChange({{ $change }})"
                                 class="form-control text-center" value="{{ $efectivo }}">
                             <div class="input-group-append">
                                 <span wire:click="$set('efectivo', 0)" class="input-group-text"
@@ -46,7 +49,7 @@
                             </div>
                             <div class="col-sm-12 col-md-12 col-lg-6">
                                 @if ($efectivo >= $total && $total > 0)
-                                    <button wire:click.prevent="shoppingSale" class="btn btn-dark btn-md btn-block">GUARDAR
+                                    <button wire:click.prevent="saveShopping" class="btn btn-dark btn-md btn-block">GUARDAR
                                         F9</button>
                                 @endif
                             </div>

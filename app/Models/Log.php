@@ -13,7 +13,8 @@ class Log extends Model
         'action',
         'message',
         'categories',
-        'user_id'
+        'user_id',
+        'salepoint'
     ];
 
     public function user(){

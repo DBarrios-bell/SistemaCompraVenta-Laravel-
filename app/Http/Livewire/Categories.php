@@ -70,7 +70,7 @@ class Categories extends Component
 
         $category = Category::create([
             'name' => $this->name,
-            // 'Salepoint_id'=> $this->session,
+            'salepoint_id'=> $this->session,
             'pventa_id'=> $this->session,
         ]);
 

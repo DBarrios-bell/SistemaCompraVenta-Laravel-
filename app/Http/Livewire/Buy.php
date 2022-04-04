@@ -14,7 +14,7 @@ use DB;
 class Buy extends Component
 {
 
-    public $total, $itemsQuantity, $efectivo, $change, $cant, $provider_id;
+    public $total, $itemsQuantity, $efectivo, $change, $cant, $provider_id, $session;
 
     // inicializa las propiedades en 0
     public function mount(){
@@ -23,6 +23,7 @@ class Buy extends Component
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->provider_id = '0';
+        $this->session = session("ptventa");
     }
 
     public function render()
@@ -40,6 +41,11 @@ class Buy extends Component
     public function ACash($value)
     {
         $this->efectivo += ($value == 0 ? $this->total : $value);
+        $this->change = ($this->efectivo - $this->total);
+    }
+
+    //calcula el cambio presionando tab desde la caja de efectivo
+    public function AChange(){
         $this->change = ($this->efectivo - $this->total);
     }
 
@@ -167,7 +173,7 @@ class Buy extends Component
     }
 
     // guardar ventas
-    public function shoppingSale()
+    public function saveShopping()
     {
         if($this->total <= 0)
         {
@@ -197,7 +203,9 @@ class Buy extends Component
                 'cash' => $this->efectivo,
                 'change' => $this->change,
                 'user_id' => Auth()->user()->id,
-                'provider_id' => $this->provider_id
+                'provider_id' => $this->provider_id,
+                'salepoint_id' => $this->session,
+
             ]);
             if($shopping)
             {

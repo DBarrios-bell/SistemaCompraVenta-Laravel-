@@ -35,6 +35,7 @@ class SalePoint extends Component
     {
         if($id >0){
             session(['ptventa'=>$id]);
+            session(['ptventa_name'=>SalePoints::find($id)->name]);
             // $this->emit('point-added',session('ptventa'));
             return redirect()->to('/categories');
         }
