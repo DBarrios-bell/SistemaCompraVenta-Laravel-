@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ShoppingDetails;
+use App\Models\Stock;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -47,8 +48,10 @@ class Products extends Component
                         ->paginate($this->pagination);
         else
             $products = Product::join('categories as c' , 'c.id', 'products.category_id')
-                        ->select('products.*','c.name as category')
-                        ->orderBy('products.stock', 'asc')
+                        ->join('stocks as s', 's.product_id', 'products.id')
+                        ->select('products.*','c.name as category','s.stock as stock')
+                        ->where('s.salepoint_id',session('ptventa') )
+                        ->orderBy('stock', 'asc')
                         ->paginate($this->pagination);
 
         return view('livewire.products.component',[
@@ -88,7 +91,7 @@ class Products extends Component
             'cost' => $this->cleanValue($this->cost),
             'price' => $this->cleanValue($this->price),
             'barcode' => $this->barcode,
-            'stock' => 0,
+            // 'stock' => 0,
             'alerts' => $this->alerts,
             'category_id' => $this->categoryid
         ]);
@@ -100,6 +103,16 @@ class Products extends Component
             $product->image = $customFileName;
             $product->save();
         }
+
+        if($product){
+            $stock = Stock::create([
+                'product_id' => $product->id,
+                'salepoint_id' => session('ptventa'),
+                'stock' => 0
+            ]);
+            $stock->save();
+        }
+
         Logs::logs('Crear',"Id: {$product->id} - nombre: {$product->name}", $this->componentName);
         $this->resetUI();
         $this->emit('product-added', 'Producto Registrado');

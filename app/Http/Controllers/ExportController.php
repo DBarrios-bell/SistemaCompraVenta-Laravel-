@@ -37,7 +37,7 @@ class ExportController extends Controller
         }else{
             $data =Sale::join('users as u', 'u.id', 'sales.user_id')
             ->select('sales.*','u.name as user')
-            ->whereBetween('sales.create_at',[$from, $to])
+            ->whereBetween('sales.created_at',[$from, $to])
             ->where('user_id', $userId)
             ->orderBy('sales.id','asc')
             ->get();
@@ -73,7 +73,7 @@ class ExportController extends Controller
         }else{
             $info =Shopping::join('users as u', 'u.id', 'shoppings.user_id')
             ->select('shoppings.*','u.name as user')
-            ->whereBetween('shoppings.create_at',[$from, $to])
+            ->whereBetween('shoppings.created_at',[$from, $to])
             ->where('user_id', $userId)
             ->orderBy('shoppings.id','asc')
             ->get();

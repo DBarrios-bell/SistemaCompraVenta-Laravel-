@@ -9,6 +9,7 @@ use App\Models\Shopping;
 use App\Models\ShoppingDetails;
 use App\Models\Denomination;
 use App\Models\Provider;
+use App\Models\Stock;
 use DB;
 
 class Buy extends Component
@@ -217,10 +218,15 @@ class Buy extends Component
                         'product_id' => $item->id,
                         'shopping_id' => $shopping->id,
                     ]);
+
+                    $cant = Stock::Where('product_id', $item->id)
+                            ->where('salepoint_id', $this->session)->first();
+                    $cant->stock = $cant->stock + $item->quantity;
                     // update stock
-                    $product = Product::find($item->id);
-                    $product->stock = $product->stock + $item->quantity;
-                    $product->save();
+                    // $product = Product::find($item->id);
+                    // $product->stock = $product->stock + $item->quantity;
+                    $cant->save();
+                    // return dd($stock);
                 }
             }
 
