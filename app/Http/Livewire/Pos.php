@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class Pos extends Component
 {
-    public $total, $itemsQuantity, $efectivo, $change, $session;
+    public $total, $itemsQuantity, $efectivo, $change, $session , $sessionName, $productId;
 
     // inicializa las propiedades en 0
     public function mount(){
@@ -23,6 +23,7 @@ class Pos extends Component
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
         $this->session = session("ptventa");
+        $this->sessionName = session("ptventa_name");
 
     }
 
@@ -63,41 +64,31 @@ class Pos extends Component
         $product = Product::join('stocks as s', 's.product_id','products.id')
                         ->select('products.*','s.stock as stock','s.salepoint_id as spoint')
                         ->where('products.barcode', $barcode)
-                        // ->where('s.salepoint_id', $this->session)
+                        ->where('s.salepoint_id', $this->session)
                         ->first();
 
-
-        // $cant = Stock::select('stock')
-        // ->where('product_id', $product->id)
-        // ->where('product_id', $product->id)
-        
-        // else{
-            // if($product == null || empty($empty))
-            if($product == null || empty($product))
+            if($product == null && empty($empty))
             {
-                $this->emit('scan-notfound','El producto no esta registrado');
+                $this->emit('scan-notfound',"El producto no existe para {$this->sessionName}");
             } else {
-                if ($product->spoint != $this->session || $product->spoint == null || empty($product->spoint)) {
-                    $this->emit('scan-notfound','El producto no esta disponible en esta tienda Hee Hee');
-                }else{
                 //actualiza la cantidad si el producto ya existe
                 if($this->InCart($product->id))
                 {
                     $this->increaseQty($product->id);
                     return;
                 }
-    
-                if($product->stock < 1)
+                //valida stock del producto
+                if($product->stock < 1 && $product->spoint == $this->session)
                 {
                     $this->emit('no-stock','Stock Insuficiente :/');
                     return ;
                 }
-    
+                //valida que el porducto no pertenzca a al punto de venta
+
                 Cart::add($product->id, $product->name, $product->price, $cant); // agregar , $product->image
                 $this->total = Cart::getTotal();
                 $this->itemsQuantity = Cart::getTotalQuantity();
-                $this->emit('scan-ok','Producto Agregado');
-            }
+                $this->emit('scan-ok','Producto Agregado !');
         }
     }
 
@@ -116,40 +107,42 @@ class Pos extends Component
     {
         $title='';
         $product = Product::join('stocks as s', 's.product_id','products.id')
-        ->select('products.*','s.stock as stock','s.salepoint_id as spoint')->find($productId);
-        // ->where('s.salepoint_id', $this->session);
+        ->select('products.*','s.stock as stock','s.salepoint_id as spoint')
+        ->where('s.salepoint_id', $this->session)
+        ->find($productId);
         $exist = Cart::get($productId);
 
-        
-        // else{
-
         if($exist)
-            $title ='Cantidad Actualizada';
+            $title ='Cantidad Actualizada :p';
         else
-            $title = 'Producto Agregado';
+            $title = 'Producto Agregado :p';
 
-        if($exist)
-        {
-            if ($product->spoint != $this->session || $product->spoint == null || empty($product->spoint)) {
+        if($exist){
+            if ($product->spoint == null || empty($product->spoint)) {
                 $this->emit('no-stock','El producto no esta disponible en esta tienda Hee Hee');
                 return;
             }
-            // else{
-            // if($product->stock < ($cant + $exist->quantity))
-            //     {
-            //         $this->emit('no-stock','Stock Insuficiente :/');
-            //         return;
-            //     }
-            // }
+            else{
+                //valida la cantidad del stock
+                if($product->stock < ($cant + $exist->quantity ) && $product->spoint == $this->session)
+                {
+                    $this->emit('no-stock','Stock Insuficiente :/');
+                    return;
+                }
+                //valida que el porducto no pertenzca a al punto de venta
+                if($product->spoint != $this->session)
+                {
+                    $this->emit('no-stock','El producto no tiene existencia :1XD');
+                    return;
+                }
+            }
         }
-       
 
         Cart::add($product->id, $product->name, $product->price, $cant); //agregar $product->image
         $this->total = Cart::getTotal();
         $this->itemsQuantity = Cart::getTotalQuantity();
 
          $this->emit('scan-ok', $title);
-        // }
     }
 
     // reemplaza la informacion del producto dentro del carrito
@@ -157,31 +150,34 @@ class Pos extends Component
     {
         $title='';
         $product = Product::join('stocks as s', 's.product_id','products.id')
-        ->select('products.*','s.stock as stock','s.salepoint_id as spoint')->find($productId);
-        // ->where('s.salepoint_id', $this->session);
-        // $exist = Cart::get($productId);
-
-        
-        // else{
-
+        ->select('products.*','s.stock as stock','s.salepoint_id as spoint')
+        ->where('s.salepoint_id', $this->session)
+        ->find($productId);
 
         $exist = Cart::get($productId);
         if($exist)
-            $title ='Cantidad Actualizada';
+            $title ='Cantidad Actualizada :d';
         else
-            $title = 'Producto Agregado';
+            $title = 'Producto Agregado :d';
 
         if($exist)
         {
-            if ($product->spoint != $this->session || $product->spoint == null || empty($product->spoint)) {
-                $this->emit('scan-notfound','El producto no esta disponible en esta tienda Hee Hee');
+            if ($product->spoint == null || empty($product->spoint)) {
+                $this->emit('scan-notfound','El producto tiene existencia :2XD');
                 return;
             }
-            // if($product->stock < $cant)
-            // {
-            //     $this->emit('no-stock','Stock Insuficiente :/ ok');
-            //     return;
-            // }
+            //valida la cantidad del stock - al agregar al carrito
+            if($product->stock < $cant && $product->spoint == $this->session)
+            {
+                $this->emit('no-stock','Stock Insuficiente :/ ok');
+                return;
+            }
+            //valida que el porducto no pertenzca a al punto de venta
+            if($product->spoint != $this->session)
+            {
+            $this->emit('no-stock','El producto no tiene existencia :3XD');
+            return;
+            }
         }
         $this->removeItem($productId);
 
@@ -192,7 +188,6 @@ class Pos extends Component
             $this->itemsQuantity = Cart::getTotalQuantity();
             $this->emit('scan-ok', $title);
         }
-    // }
 }
 
     // elimina el item(producto) del carrito

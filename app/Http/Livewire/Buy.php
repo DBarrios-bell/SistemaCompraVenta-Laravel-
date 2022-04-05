@@ -221,12 +221,21 @@ class Buy extends Component
 
                     $cant = Stock::Where('product_id', $item->id)
                             ->where('salepoint_id', $this->session)->first();
+
+                    if($cant == null || empty($cant)){
+                        Stock::create([
+                            'product_id' => $item->id,
+                            'salepoint_id' => $this->session,
+                            'stock' => $item->quantity,
+                        ]);
+                    }else{
                     $cant->stock = $cant->stock + $item->quantity;
                     // update stock
                     // $product = Product::find($item->id);
                     // $product->stock = $product->stock + $item->quantity;
                     $cant->save();
                     // return dd($stock);
+                    }
                 }
             }
 
