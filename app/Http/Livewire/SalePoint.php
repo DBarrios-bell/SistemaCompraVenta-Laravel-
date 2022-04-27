@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\SalePoints;
 use App\Models\UserSalePoints;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class SalePoint extends Component
@@ -34,6 +35,8 @@ class SalePoint extends Component
     public function SelectPTVenta($id)
     {
         if($id >0){
+            // $data = Session::all();
+            // return dd($data);
             session(['ptventa'=>$id]);
             session(['ptventa_name'=>SalePoints::find($id)->name]);
             // $this->emit('point-added',session('ptventa'));

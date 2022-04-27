@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+use App\Models\Product;
+use Darryldecode\Cart\Cart;
+
 trait CartTrait{
 
     // recibe el codigo de barra escaneado y lo agrega al carrito

@@ -41,7 +41,9 @@ class Categories extends Component
          else
         $data = Category::where('salepoint_id', $this->session)->orderBy('id', 'desc')
         ->paginate($this->pagination);
-        return view('livewire.category.categories', ['categories' => $data])
+        return view('livewire.category.categories', [
+            'categories' => $data
+            ])
         ->extends('layouts.theme.app')
         ->section('content');
     }
