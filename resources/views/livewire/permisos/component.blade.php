@@ -74,13 +74,13 @@
             noty(Msg)
         })
         window.livewire.on('permiso-deleted', Msg => {
-            noty(Msg)
+            noty(Msg,2)
         })
         window.livewire.on('permiso-exists', Msg => {
-            noty(Msg)
+            noty(Msg,2)
         })
         window.livewire.on('permiso-error', Msg => {
-            noty(Msg)
+            noty(Msg,2)
         })
         // oculta la modal
         window.livewire.on('hide-modal', Msg => {

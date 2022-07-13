@@ -97,7 +97,7 @@ class Permisos extends Component
         $rolesCount = Permission::find($id)->getRoleNames()->count();
         if($rolesCount > 0)
         {
-            $this->emit('permiso-error', 'No se puede eliminar el permiso por que tiene permisos asociados');
+            $this->emit('permiso-error', 'El permiso esta asignado a uno o mas roles');
             return;
         }
         $permission = Permission::find($id);
