@@ -48,7 +48,7 @@ class Pos extends Component
         $this->change = ($this->efectivo - $this->total);
     }
 
-        // capturar los eventos enviados desde el fron
+        // capturar los eventos enviados desde el front
     protected $listeners = [
         'scan-code' => 'ScanCode',
         'removeItem' => 'removeItem',
@@ -62,7 +62,7 @@ class Pos extends Component
     public function ScanCode($barcode, $cant = 1)
     {
         $product = Product::join('stocks as s', 's.product_id','products.id')
-                        ->select('products.*','s.stock as stock','s.salepoint_id as spoint')
+                        ->select('products.*','s.quantity as stock','s.salepoint_id as spoint')
                         ->where('products.barcode', $barcode)
                         ->where('s.salepoint_id', $this->session)
                         ->first();
@@ -107,7 +107,7 @@ class Pos extends Component
     {
         $title='';
         $product = Product::join('stocks as s', 's.product_id','products.id')
-        ->select('products.*','s.stock as stock','s.salepoint_id as spoint')
+        ->select('products.*','s.quantity as stock','s.salepoint_id as spoint')
         ->where('s.salepoint_id', $this->session)
         ->find($productId);
         $exist = Cart::get($productId);
@@ -150,7 +150,7 @@ class Pos extends Component
     {
         $title='';
         $product = Product::join('stocks as s', 's.product_id','products.id')
-        ->select('products.*','s.stock as stock','s.salepoint_id as spoint')
+        ->select('products.*','s.quantity as stock','s.salepoint_id as spoint')
         ->where('s.salepoint_id', $this->session)
         ->find($productId);
 
@@ -275,7 +275,7 @@ class Pos extends Component
                     // $product->save();
                     $cant = Stock::Where('product_id', $item->id)
                             ->where('salepoint_id', $this->session)->first();
-                    $cant->stock = $cant->stock - $item->quantity;
+                    $cant->quantity = $cant->quantity - $item->quantity;
                     $cant->save();
                 }
             }

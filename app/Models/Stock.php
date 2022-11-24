@@ -12,7 +12,7 @@ class Stock extends Model
     protected $fillable = [
         'product_id',
         'salepoint_id',
-        'stock'
+        'quantity'
     ];
 
     public function product(){

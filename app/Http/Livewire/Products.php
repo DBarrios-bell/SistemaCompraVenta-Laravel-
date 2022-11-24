@@ -49,9 +49,9 @@ class Products extends Component
         else
             $products = Product::join('categories as c' , 'c.id', 'products.category_id')
                         ->join('stocks as s', 's.product_id', 'products.id')
-                        ->select('products.*','c.name as category','s.stock as stock')
+                        ->select('products.*','c.name as category','s.quantity as stock')
                         ->where('s.salepoint_id',session('ptventa') )
-                        ->orderBy('stock', 'asc')
+                        ->orderBy('s.quantity', 'asc')
                         ->paginate($this->pagination);
 
         return view('livewire.products.component',[
@@ -108,7 +108,7 @@ class Products extends Component
             $stock = Stock::create([
                 'product_id' => $product->id,
                 'salepoint_id' => session('ptventa'),
-                'stock' => 0
+                'quantity' => 0
             ]);
             $stock->save();
         }

@@ -50,7 +50,7 @@ class Buy extends Component
         $this->change = ($this->efectivo - $this->total);
     }
 
-     // capturar los eventos enviados desde el fron
+     // capturar los eventos enviados desde el front
     protected $listeners = [
         'scan-code' => 'ScanCode',
         'removeItem' => 'removeItem',
@@ -226,10 +226,10 @@ class Buy extends Component
                         Stock::create([
                             'product_id' => $item->id,
                             'salepoint_id' => $this->session,
-                            'stock' => $item->quantity,
+                            'quantity' => $item->quantity,
                         ]);
                     }else{
-                    $cant->stock = $cant->stock + $item->quantity;
+                    $cant->quantity = $cant->quantity + $item->quantity;
                     // update stock
                     // $product = Product::find($item->id);
                     // $product->stock = $product->stock + $item->quantity;
