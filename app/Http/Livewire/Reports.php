@@ -7,6 +7,7 @@ use Livewire\Component;
 use App\Models\User;
 use App\Models\Sale;
 use App\Models\SaleDetails;
+use App\Models\Stock;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\DB as FacadesDB;
@@ -135,8 +136,8 @@ class Reports extends Component
     {
         $detalles = SaleDetails::where('sale_id',$saleId)->get();
         foreach($detalles as $detalle){
-            $producto = Product::where('id',$detalle->product_id)->first();
-            $producto->stock+=$detalle->quantity;
+            $producto = Stock::Where('product_id', $detalle->product_id)->where('salepoint_id', $this->session)->first();
+            $producto->quantity+=$detalle->quantity;
             $producto->save();
         }
             $venta = Sale::where('id',$saleId)->first();

@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Product;
 use App\Models\Shopping;
 use App\Models\ShoppingDetails;
+use App\Models\Stock;
 use App\Models\User;
 use Livewire\Component;
 use Carbon\Carbon;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class ReportsBuy extends Component
 {
 
-    public $componentName, $info, $details, $sumDetails, $countDetails, $reportType, $userId, $dateFrom, $dateTo,
+    public $componentName, $info, $details, $sumDetails, $countDetails, $reportType, $userId, $dateFrom, $dateTo,$session,
     $buyId, $buy;
 
     public function mount()
@@ -26,6 +27,7 @@ class ReportsBuy extends Component
         $this->reportType =0;
         $this->userId =0;
         $this->buyId =0;
+        $this->session = session('ptventa');
     }
     public function render()
     {
@@ -95,9 +97,10 @@ class ReportsBuy extends Component
 
         $detalles = ShoppingDetails::where('shopping_id',$buyId)->get();
         foreach($detalles as $detalle){
-            $producto = Product::where('id',$detalle->product_id)->first();
-            if($detalle->quantity <= $producto->stock){
-                $producto->stock -= $detalle->quantity;
+            $producto = Stock::Where('product_id', $detalle->product_id)->where('salepoint_id', $this->session)->first();
+            //  dd($producto);
+            if($detalle->quantity <= $producto->quantity){
+                $producto->quantity -= $detalle->quantity;
                 $producto->save();
             }else{
                 DB::rollBack();

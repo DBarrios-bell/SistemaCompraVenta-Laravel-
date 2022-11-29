@@ -39,7 +39,8 @@ class Categories extends Component
            $data = Category::where('name', 'like', '%' . $this->search . '%')->paginate($this->pagination);
             // $data = Category::search('name' , 'like');
          else
-        $data = Category::where('salepoint_id', $this->session)->orderBy('id', 'desc')
+        // $data = Category::where('salepoint_id', $this->session)->orderBy('id', 'desc')
+        $data = Category::select('*')
         ->paginate($this->pagination);
         return view('livewire.category.categories', [
             'categories' => $data
